@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBI OS Dashboard</title>
+<meta name="theme-color" content="#0B1220">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<style>
+:root{--midnight:#0B1220;--slate:#1E293B;--teal:#0F766E;--cloud:#F8FAFC;--steel:#94A3B8;--muted:#64748B;--gold:#C69214;}
+*{box-sizing:border-box;} body{margin:0;font-family:Arial,sans-serif;background:var(--midnight);color:var(--cloud);line-height:1.6;}
+.shell{min-height:100vh;display:grid;grid-template-columns:240px 1fr;}.sidebar{border-right:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.9);padding:24px;}.brand{font-size:30px;font-weight:900;margin-bottom:30px;}.brand span{color:var(--teal);}.side-link{display:block;color:var(--steel);text-decoration:none;padding:12px 14px;border-radius:10px;font-weight:800;margin-bottom:6px;}.side-link.active,.side-link:hover{background:rgba(15,118,110,.18);color:var(--cloud);}.side-note{color:var(--muted);font-size:13px;margin-top:30px;}
+.main{padding:34px;}.eyebrow{color:var(--teal);font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px;}.main h1{font-size:42px;line-height:1.15;margin:0 0 12px;}.intro{color:var(--steel);font-size:18px;max-width:760px;margin:0 0 34px;}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:34px;}.card{background:var(--slate);border:1px solid rgba(148,163,184,.16);border-radius:18px;padding:24px;min-height:170px;}.card h2{margin:0 0 10px;font-size:24px;}.card p{color:var(--steel);margin:0 0 18px;}.badge{display:inline-block;color:var(--gold);font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}.button{display:inline-block;margin-top:8px;padding:12px 18px;background:var(--teal);color:white;text-decoration:none;font-weight:900;border-radius:10px;}.disabled{opacity:.58;}.panel{background:rgba(30,41,59,.72);border:1px solid rgba(148,163,184,.16);border-radius:18px;padding:24px;}.roadmap{display:grid;gap:12px;}.roadmap-item{display:flex;justify-content:space-between;gap:16px;background:rgba(11,18,32,.55);border:1px solid rgba(148,163,184,.12);padding:14px 16px;border-radius:12px;}.roadmap-item span{color:var(--steel);}
+@media(max-width:900px){.shell{grid-template-columns:1fr;}.main{padding:24px;}.grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar"><div class="brand">RB<span>I</span> OS</div><a class="side-link active" href="/dashboard.html">Dashboard</a><a class="side-link" href="#pitchguard">PitchGuard</a><a class="side-link" href="#pitchiq">Pitch IQ</a><a class="side-link" href="#scouting">Scouting</a><a class="side-link" href="#development">Development</a><a class="side-link" href="/">Public Site</a><div class="side-note">RBI OS v0.6<br>Product shell preview</div></aside>
+<main class="main"><p class="eyebrow">Dashboard</p><h1>Baseball decisions, organized.</h1><p class="intro">The RBI dashboard is the future home for player development, pitching workload, scouting, and performance tools.</p><section class="grid"><div id="pitchguard" class="card"><span class="badge">First Product</span><h2>PitchGuard</h2><p>Pitch count, rest, workload, and pitcher usage guidance.</p><a class="button">Coming Soon</a></div><div id="pitchiq" class="card disabled"><span class="badge">Future</span><h2>Pitch IQ</h2><p>Pitching analysis, mechanical checkpoints, and drill recommendations.</p><a class="button">Planned</a></div><div id="scouting" class="card disabled"><span class="badge">Future</span><h2>Scouting Intelligence</h2><p>Opponent scouting, matchup notes, and game prep systems.</p><a class="button">Planned</a></div><div id="development" class="card disabled"><span class="badge">Future</span><h2>Player Development</h2><p>Development plans, player notes, progress tracking, and resources.</p><a class="button">Planned</a></div><div class="card disabled"><span class="badge">Future</span><h2>Player Profiles</h2><p>Player records, usage history, development targets, and notes.</p><a class="button">Planned</a></div><div class="card disabled"><span class="badge">System</span><h2>Settings</h2><p>Team preferences and PWA settings will live here.</p><a class="button">Planned</a></div></section><section class="panel"><h2>Build Roadmap</h2><div class="roadmap"><div class="roadmap-item"><strong>Dashboard shell</strong><span>Current</span></div><div class="roadmap-item"><strong>PitchGuard Lite UI</strong><span>Next</span></div><div class="roadmap-item"><strong>Founding access wiring</strong><span>Blocked</span></div><div class="roadmap-item"><strong>PWA icon package</strong><span>In progress</span></div></div></section></main>
+</div>
+</body>
+</html>
