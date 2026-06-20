@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 760" role="img" aria-label="RBI pitcher illustration">
+  <defs>
+    <linearGradient id="body" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#334155"/>
+      <stop offset="0.55" stop-color="#1E293B"/>
+      <stop offset="1" stop-color="#0B1220"/>
+    </linearGradient>
+    <linearGradient id="dark" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#000" flood-opacity="0.42"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)" opacity="0.98">
+    <path d="M250 188 C252 140 288 108 350 108 C412 108 448 140 450 188 L472 222 C514 258 536 319 548 425 L586 732 L114 732 L152 425 C164 319 186 258 228 222 Z" fill="url(#body)"/>
+    <path d="M228 222 C260 246 310 260 350 260 C390 260 440 246 472 222 C456 312 432 386 350 386 C268 386 244 312 228 222 Z" fill="#0F172A" opacity="0.78"/>
+    <path d="M214 118 C244 68 456 68 486 118 C500 144 490 178 468 190 C404 206 296 206 232 190 C210 178 200 144 214 118 Z" fill="url(#dark)" stroke="#334155" stroke-width="2"/>
+    <path d="M218 176 C275 198 425 198 482 176 C500 190 506 218 488 232 C428 246 272 246 212 232 C194 218 200 190 218 176 Z" fill="#111827" stroke="#334155" stroke-width="2"/>
+    <text x="350" y="158" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="900" fill="#F8FAFC" letter-spacing="2">RBI</text>
+    <path d="M199 348 C161 378 140 438 150 496 C160 556 199 604 263 604 C326 604 376 562 376 506 C376 438 312 356 249 334 C231 328 214 336 199 348 Z" fill="#0B1220" stroke="#334155" stroke-width="3"/>
+    <path d="M170 462 C230 412 310 420 362 478" fill="none" stroke="#334155" stroke-width="2" opacity="0.7"/>
+    <path d="M184 512 C238 478 306 486 354 528" fill="none" stroke="#334155" stroke-width="2" opacity="0.55"/>
+    <path d="M354 324 C414 340 486 410 506 492" fill="none" stroke="#475569" stroke-width="3" opacity="0.72"/>
+    <path d="M318 312 C390 322 470 390 506 492" fill="none" stroke="#0F766E" stroke-width="2" opacity="0.55"/>
+    <circle cx="350" cy="384" r="8" fill="#14B8A6"/>
+  </g>
+</svg>
