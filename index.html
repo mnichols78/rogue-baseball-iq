@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rogue Baseball Intelligence</title>
+<meta name="theme-color" content="#0B1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RBI">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon.svg">
 <style>
 :root{--midnight:#0B1220;--slate:#1E293B;--teal:#0F766E;--cloud:#F8FAFC;--steel:#94A3B8;--muted:#64748B;--gold:#C69214;}
 *{box-sizing:border-box;} html{scroll-behavior:smooth;}
@@ -29,6 +36,13 @@ footer{max-width:1120px;margin:auto;padding:50px 24px 70px;color:var(--muted);fo
 <section id="pitchguard" class="section"><div class="section-head"><p class="kicker">Flagship Product</p><h2>PitchGuard</h2><p>Reduce guesswork and make better pitcher usage decisions.</p></div><div class="grid"><div class="card"><span class="badge">Audience</span><h3>Who It's For</h3><p>Travel ball parents<br>Travel ball coaches</p></div><div class="card"><span class="badge">Problem</span><h3>What It Solves</h3><p>Pitch counts<br>Recovery management<br>Tournament workloads<br>Usage planning</p></div><div class="card"><span class="badge">Status</span><h3>Founder Edition</h3><p>Currently in development.<br><br>Launching with a small group of founding users.</p></div></div></section>
 <section id="roadmap" class="section"><div class="section-head"><p class="kicker">Roadmap</p><h2>RBI OS v0.1</h2><p>The priority is shipping visible progress, learning from usage, and keeping the system simple.</p></div><div class="roadmap"><div class="roadmap-item"><strong>Foundation</strong><span>Complete</span></div><div class="roadmap-item"><strong>Public website</strong><span>In progress</span></div><div class="roadmap-item"><strong>Early access list</strong><span>Next</span></div><div class="roadmap-item"><strong>PitchGuard Lite</strong><span>Planned</span></div><div class="roadmap-item"><strong>PWA install shell</strong><span>Planned</span></div></div></section>
 <section id="early-access" class="section"><div class="section-head"><p class="kicker">Early Access</p><h2>Request founding access.</h2><p>Help shape PitchGuard Founder Edition and future RBI tools.</p></div><div class="form-card"><form><div class="form-grid"><div class="form-field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name"></div><div class="form-field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com"></div></div><div class="form-field"><label for="role">I am a</label><select id="role" name="role"><option>Parent</option><option>Coach</option><option>Organization</option><option>Player</option></select></div><label><strong>Most interested in</strong></label><div class="checkboxes"><label class="check"><input type="checkbox"> PitchGuard</label><label class="check"><input type="checkbox"> Pitch IQ</label><label class="check"><input type="checkbox"> Scouting Intelligence</label><label class="check"><input type="checkbox"> Player Development</label></div><button class="button" type="button">Request Early Access</button><p class="note">Form wiring comes next. This version is the visible conversion surface for RBI OS v0.4.</p></form></div></section>
-<footer><div>Rogue Baseball Intelligence</div><div>RBI OS v0.4</div></footer>
+<footer><div>Rogue Baseball Intelligence</div><div>RBI OS v0.5</div></footer>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js');
+  });
+}
+</script>
 </body>
 </html>
