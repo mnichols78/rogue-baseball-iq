@@ -12,6 +12,15 @@
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icon.svg">
   <link rel="stylesheet" href="/css/home.css">
+  <style>
+    .product-suite { grid-template-columns: repeat(3, 1fr); }
+    .product-suite .card:nth-child(4) { grid-column: 1 / 2; }
+    .product-suite .card:nth-child(5) { grid-column: 2 / 3; }
+    @media (max-width: 980px) {
+      .product-suite { grid-template-columns: 1fr; }
+      .product-suite .card:nth-child(4), .product-suite .card:nth-child(5) { grid-column: auto; }
+    }
+  </style>
 </head>
 <body>
   <div class="page-rail"></div>
@@ -24,9 +33,9 @@
       </a>
       <div class="links">
         <a href="#top">Home</a>
-        <a href="#products">Products</a>
-        <a href="#why">Why RBI</a>
-        <a href="#roadmap">Roadmap</a>
+        <a href="#pitchguard">PitchGuard</a>
+        <a href="#pitchlab">PitchLab</a>
+        <a href="#scouthub">ScoutHub</a>
         <a href="/dashboard.html">Dashboard</a>
         <a href="#early-access" class="nav-cta">Early Access</a>
       </div>
@@ -37,12 +46,12 @@
         <h1>Rogue Baseball <span>Intelligence</span></h1>
         <div class="accent-line"></div>
         <div class="pill-row">
-          <div class="mini-pill"><span class="mini-icon">↗</span>Player Development</div>
-          <div class="mini-pill"><span class="mini-icon">⌖</span>Game Intelligence</div>
-          <div class="mini-pill"><span class="mini-icon">▥</span>Performance Systems</div>
-          <div class="mini-pill"><span class="mini-icon">✓</span>Baseball Operations</div>
+          <div class="mini-pill"><span class="mini-icon">✓</span>Protect</div>
+          <div class="mini-pill"><span class="mini-icon">↗</span>Develop</div>
+          <div class="mini-pill"><span class="mini-icon">⌖</span>Prepare</div>
+          <div class="mini-pill"><span class="mini-icon">▥</span>Operate</div>
         </div>
-        <p>Helping players, coaches, and organizations make better baseball decisions.</p>
+        <p>A baseball operating system for workload, player development, scouting, and team execution.</p>
         <div class="actions">
           <a class="button" href="/dashboard.html">Explore RBI →</a>
           <a class="button secondary" href="#early-access">Get Early Access</a>
@@ -69,15 +78,15 @@
   <section class="section-light" id="products">
     <div class="section-inner">
       <div class="section-head">
-        <p class="kicker">Products</p>
-        <h2>Focused tools for real baseball decisions.</h2>
-        <p>RBI is being built as a practical operating system for workload, development, scouting, and team execution.</p>
+        <p class="kicker">Product Suite</p>
+        <h2>Five focused modules. One baseball operating system.</h2>
+        <p>RBI is being built as a practical software suite for protecting players, developing skills, preparing for opponents, and running teams.</p>
       </div>
-      <div class="cards">
-        <div class="card">
+      <div class="cards product-suite">
+        <div class="card" id="pitchguard">
           <div class="icon">✓</div>
           <h3>PitchGuard</h3>
-          <p>Monitor pitcher workload, recovery, and usage risk.</p>
+          <p>Protect pitcher health and manage workload.</p>
           <ul>
             <li>Pitch counts</li>
             <li>Rest guidance</li>
@@ -86,22 +95,34 @@
           </ul>
           <a class="learn" href="#early-access">Learn More →</a>
         </div>
-        <div class="card">
+        <div class="card" id="pitchlab">
           <div class="icon">⌖</div>
           <h3>PitchLab</h3>
-          <p>Pitching analysis, mechanical checkpoints, and drill recommendations.</p>
+          <p>Analyze pitching mechanics and prescribe drills.</p>
           <ul>
             <li>Pitch analysis</li>
-            <li>Mechanical assessment</li>
+            <li>Mechanical checkpoints</li>
             <li>Drill mapping</li>
-            <li>Arm care and workload</li>
+            <li>Practice plans</li>
           </ul>
           <a class="learn" href="#early-access">Learn More →</a>
         </div>
-        <div class="card">
+        <div class="card" id="swinglab">
+          <div class="icon">↗</div>
+          <h3>SwingLab</h3>
+          <p>Analyze hitting mechanics and prescribe drills.</p>
+          <ul>
+            <li>Swing analysis</li>
+            <li>Mechanical checkpoints</li>
+            <li>Drill mapping</li>
+            <li>Practice plans</li>
+          </ul>
+          <a class="learn" href="#early-access">Learn More →</a>
+        </div>
+        <div class="card" id="scouthub">
           <div class="icon">▥</div>
-          <h3>ScoutIQ</h3>
-          <p>Opponent scouting and game-planning workflows.</p>
+          <h3>ScoutHub</h3>
+          <p>Build scouting reports and game plans.</p>
           <ul>
             <li>Opponent tendencies</li>
             <li>Game plans</li>
@@ -110,10 +131,10 @@
           </ul>
           <a class="learn" href="#early-access">Learn More →</a>
         </div>
-        <div class="card">
-          <div class="icon">↗</div>
+        <div class="card" id="rbios">
+          <div class="icon">▣</div>
           <h3>RBI OS</h3>
-          <p>The dashboard layer for teams, players, and baseball operations.</p>
+          <p>The operating system for baseball organizations.</p>
           <ul>
             <li>Team dashboard</li>
             <li>Player profiles</li>
@@ -130,13 +151,13 @@
     <div class="section-inner">
       <div class="section-head">
         <p class="kicker">Why RBI</p>
-        <h2>Less guesswork. Better decisions.</h2>
+        <h2>Protect. Develop. Prepare. Operate.</h2>
         <p>The goal is not to replace coaches. The goal is to give coaches and parents better decision support.</p>
       </div>
       <div class="why-grid">
-        <div class="why-card"><h3>Data-Driven</h3><p>Use workload, scouting, and development signals to make cleaner decisions.</p></div>
-        <div class="why-card"><h3>Coach-Friendly</h3><p>Built for youth, travel, and high school baseball environments where time is limited.</p></div>
-        <div class="why-card"><h3>Actionable</h3><p>Every tool should lead to a clear next step, not just another dashboard.</p></div>
+        <div class="why-card"><h3>Protect</h3><p>Prevent overuse and manage athlete workload with clearer pitcher availability guidance.</p></div>
+        <div class="why-card"><h3>Develop</h3><p>Build better players through objective feedback, mechanical checkpoints, and drill plans.</p></div>
+        <div class="why-card"><h3>Prepare</h3><p>Use scouting, opponent tendencies, and game plans to gain an edge before first pitch.</p></div>
       </div>
     </div>
   </section>
@@ -152,9 +173,11 @@
         <div class="roadmap-item"><strong>Public website</strong><span>Complete</span></div>
         <div class="roadmap-item"><strong>RBI OS dashboard shell</strong><span>Complete</span></div>
         <div class="roadmap-item"><strong>Early access list</strong><span>Next</span></div>
-        <div class="roadmap-item"><strong>PitchGuard MVP</strong><span>Planned</span></div>
+        <div class="roadmap-item"><strong>PitchGuard Lite</strong><span>Planned</span></div>
         <div class="roadmap-item"><strong>PitchLab MVP</strong><span>Planned</span></div>
-        <div class="roadmap-item"><strong>ScoutIQ</strong><span>Future</span></div>
+        <div class="roadmap-item"><strong>SwingLab MVP</strong><span>Planned</span></div>
+        <div class="roadmap-item"><strong>ScoutHub MVP</strong><span>Future</span></div>
+        <div class="roadmap-item"><strong>RBI OS v1</strong><span>Future</span></div>
       </div>
     </div>
   </section>
@@ -164,7 +187,7 @@
       <div class="section-head">
         <p class="kicker">Early Access</p>
         <h2>Help shape the first RBI tools.</h2>
-        <p>Founding access will start with PitchGuard and expand from there.</p>
+        <p>Founding access will start with PitchGuard Lite and expand across the RBI product suite.</p>
       </div>
       <a class="button" href="mailto:founders@roguebaseballiq.com">Email Founders</a>
     </div>
