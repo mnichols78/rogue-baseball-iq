@@ -1,207 +1,313 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Rogue Baseball Intelligence</title>
-
 <style>
-
 :root{
-
---midnight:#0B1220;
-
---field-slate:#1E293B;
-
---teal:#0F766E;
-
---cloud:#F8FAFC;
-
---steel:#94A3B8;
-
+  --midnight:#0B1220;
+  --slate:#1E293B;
+  --teal:#0F766E;
+  --cloud:#F8FAFC;
+  --steel:#94A3B8;
+  --muted:#64748B;
+  --gold:#C69214;
 }
-
-*{
-
-box-sizing:border-box;
-
-}
-
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 body{
-
-margin:0;
-
-font-family:Inter,Arial,sans-serif;
-
-background:var(--midnight);
-
-color:var(--cloud);
-
-min-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
-
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--midnight);
+  color:var(--cloud);
+  line-height:1.6;
 }
-
-.container{
-
-max-width:900px;
-
-padding:60px 30px;
-
+nav{
+  position:sticky;
+  top:0;
+  background:rgba(11,18,32,.95);
+  border-bottom:1px solid rgba(148,163,184,.16);
 }
-
+.nav-inner{
+  max-width:1120px;
+  margin:auto;
+  padding:18px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+.brand{
+  font-size:28px;
+  font-weight:900;
+  color:var(--cloud);
+  text-decoration:none;
+}
+.brand span{color:var(--teal);}
+.links{display:flex;gap:20px;flex-wrap:wrap;}
+.links a{
+  color:var(--steel);
+  text-decoration:none;
+  font-weight:700;
+  font-size:14px;
+}
+.links a:hover{color:var(--cloud);}
+.cta{
+  border:1px solid var(--teal);
+  border-radius:999px;
+  padding:8px 13px;
+  color:var(--cloud)!important;
+}
+.hero{
+  max-width:1120px;
+  margin:auto;
+  padding:105px 24px 80px;
+  text-align:center;
+}
 .logo{
-
-font-size:84px;
-
-font-weight:800;
-
-letter-spacing:-4px;
-
-margin:0;
-
+  font-size:92px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-5px;
+  margin:0;
 }
-
-.logo span{
-
-color:var(--teal);
-
-}
-
+.logo span{color:var(--teal);}
 .subtitle{
-
-font-size:18px;
-
-letter-spacing:3px;
-
-color:var(--steel);
-
-margin-top:10px;
-
-margin-bottom:40px;
-
+  color:var(--steel);
+  letter-spacing:5px;
+  font-size:15px;
+  margin:22px 0 42px;
 }
-
-.section{
-
-font-size:32px;
-
-font-weight:700;
-
-line-height:1.5;
-
-margin-bottom:40px;
-
+.positioning{
+  font-size:42px;
+  line-height:1.25;
+  margin:0 0 28px;
 }
-
 .description{
-
-font-size:22px;
-
-line-height:1.7;
-
-max-width:700px;
-
-margin:auto;
-
-color:var(--steel);
-
+  max-width:740px;
+  margin:auto;
+  color:var(--steel);
+  font-size:21px;
 }
-
+.actions{
+  margin-top:42px;
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
 .button{
-
-display:inline-block;
-
-margin-top:50px;
-
-padding:16px 32px;
-
-background:var(--teal);
-
-color:white;
-
-text-decoration:none;
-
-font-weight:700;
-
-border-radius:10px;
-
+  display:inline-block;
+  padding:15px 26px;
+  background:var(--teal);
+  color:white;
+  text-decoration:none;
+  font-weight:800;
+  border-radius:10px;
 }
-
-.footer{
-
-margin-top:80px;
-
-font-size:14px;
-
-color:#64748B;
-
+.secondary{
+  background:transparent;
+  border:1px solid rgba(148,163,184,.35);
 }
-
+.section{
+  max-width:1120px;
+  margin:auto;
+  padding:70px 24px;
+}
+.section-head{
+  border-left:5px solid var(--teal);
+  padding-left:18px;
+  margin-bottom:28px;
+}
+.kicker{
+  color:var(--teal);
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin:0 0 8px;
+}
+.section h2{
+  font-size:34px;
+  line-height:1.2;
+  margin:0;
+}
+.section-head p{
+  max-width:680px;
+  color:var(--steel);
+  margin:12px 0 0;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.card{
+  background:var(--slate);
+  border:1px solid rgba(148,163,184,.16);
+  border-radius:18px;
+  padding:26px;
+}
+.card h3{font-size:22px;margin:0 0 10px;}
+.card p{color:var(--steel);margin:0;}
+.badge{
+  display:inline-block;
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+.roadmap{
+  display:grid;
+  gap:12px;
+}
+.roadmap-item{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  background:rgba(30,41,59,.7);
+  border:1px solid rgba(148,163,184,.14);
+  padding:16px 18px;
+  border-radius:14px;
+}
+.roadmap-item span{color:var(--steel);}
+footer{
+  max-width:1120px;
+  margin:auto;
+  padding:50px 24px 70px;
+  color:var(--muted);
+  font-size:14px;
+  border-top:1px solid rgba(148,163,184,.16);
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+@media(max-width:800px){
+  .nav-inner{align-items:flex-start;flex-direction:column;}
+  .logo{font-size:74px;}
+  .positioning{font-size:31px;}
+  .grid{grid-template-columns:1fr;}
+}
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="#top">RB<span>I</span></a>
+    <div class="links">
+      <a href="#solutions">Solutions</a>
+      <a href="#tools">Tools</a>
+      <a href="#roadmap">Roadmap</a>
+      <a class="cta" href="#early-access">Request Early Access</a>
+    </div>
+  </div>
+</nav>
 
-<h1 class="logo">
+<header id="top" class="hero">
+  <h1 class="logo">RB<span>I</span></h1>
+  <div class="subtitle">ROGUE BASEBALL INTELLIGENCE</div>
+  <h2 class="positioning">A baseball operating system for players, coaches, and organizations.</h2>
+  <p class="description">RBI is being built to connect player development, baseball operations, scouting, workload management, and performance systems into one practical platform.</p>
+  <div class="actions">
+    <a class="button" href="#tools">Explore RBI</a>
+    <a class="button secondary" href="#roadmap">View Roadmap</a>
+  </div>
+</header>
 
-RB<span>I</span>
+<section id="solutions" class="section">
+  <div class="section-head">
+    <p class="kicker">Solutions</p>
+    <h2>Built around the work baseball teams actually do.</h2>
+    <p>Practical decision support for development, preparation, usage, and performance.</p>
+  </div>
 
-</h1>
+  <div class="grid">
+    <div class="card">
+      <span class="badge">Development</span>
+      <h3>Player Development</h3>
+      <p>Mechanical checkpoints, development plans, drill mapping, and progress tracking.</p>
+    </div>
 
-<div class="subtitle">
+    <div class="card">
+      <span class="badge">Operations</span>
+      <h3>Baseball Operations</h3>
+      <p>Tools for team planning, player usage, role clarity, and repeatable decision systems.</p>
+    </div>
 
-ROGUE BASEBALL INTELLIGENCE
+    <div class="card">
+      <span class="badge">Performance</span>
+      <h3>Performance Systems</h3>
+      <p>Workload awareness, arm care, readiness, and player protection workflows.</p>
+    </div>
+  </div>
+</section>
 
-</div>
+<section id="tools" class="section">
+  <div class="section-head">
+    <p class="kicker">Tools</p>
+    <h2>Initial modules in development.</h2>
+    <p>The first RBI tools will stay narrow, useful, and testable.</p>
+  </div>
 
-<div class="section">
+  <div class="grid">
+    <div class="card">
+      <span class="badge">Coming Soon</span>
+      <h3>PitchGuard</h3>
+      <p>Pitch count, rest, workload, and risk-awareness tools for coaches and parents.</p>
+    </div>
 
-Player Development<br>
+    <div class="card">
+      <span class="badge">Coming Soon</span>
+      <h3>Pitch IQ</h3>
+      <p>Pitching analysis, mechanical issue identification, and drill recommendations.</p>
+    </div>
 
-Baseball Operations<br>
+    <div class="card">
+      <span class="badge">Coming Soon</span>
+      <h3>Scouting Intelligence</h3>
+      <p>Opponent scouting, matchup notes, tournament prep, and game planning systems.</p>
+    </div>
+  </div>
+</section>
 
-Performance Systems
+<section id="roadmap" class="section">
+  <div class="section-head">
+    <p class="kicker">Roadmap</p>
+    <h2>RBI OS v0.1</h2>
+    <p>The priority is shipping visible progress, learning from usage, and keeping the system simple.</p>
+  </div>
 
-</div>
+  <div class="roadmap">
+    <div class="roadmap-item"><strong>Foundation</strong><span>Complete</span></div>
+    <div class="roadmap-item"><strong>Public website</strong><span>In progress</span></div>
+    <div class="roadmap-item"><strong>Early access list</strong><span>Next</span></div>
+    <div class="roadmap-item"><strong>PitchGuard Lite</strong><span>Planned</span></div>
+    <div class="roadmap-item"><strong>PWA install shell</strong><span>Planned</span></div>
+  </div>
+</section>
 
-<div class="description">
+<section id="early-access" class="section">
+  <div class="section-head">
+    <p class="kicker">Early Access</p>
+    <h2>Founding access is coming.</h2>
+    <p>RBI will test interest in workload tools, pitching analysis, scouting templates, and development systems.</p>
+  </div>
 
-Helping players, coaches, and organizations
+  <div class="card">
+    <h3>Want to follow the build?</h3>
+    <p>Email capture and founding access options will be added next.</p>
+  </div>
+</section>
 
-make better baseball decisions.
-
-</div>
-
-<a class="button">
-
-Explore RBI
-
-</a>
-
-<div class="footer">
-
-Version 0.1
-
-</div>
-
-</div>
+<footer>
+  <div>Rogue Baseball Intelligence</div>
+  <div>RBI OS v0.2</div>
+</footer>
 
 </body>
-
 </html>
