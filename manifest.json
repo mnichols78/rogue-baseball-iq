@@ -1,0 +1,13 @@
+{
+  "name": "Rogue Baseball IQ",
+  "short_name": "RBI",
+  "description": "Rogue Baseball IQ - player development, baseball operations, and performance systems.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0B1220",
+  "theme_color": "#0B1220",
+  "orientation": "portrait-primary",
+  "categories": ["sports", "productivity"],
+  "icons": []
+}
