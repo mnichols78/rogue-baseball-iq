@@ -6,7 +6,7 @@
 <title>RBI Account</title>
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <style>
-:root{--midnight:#0B1220;--slate:#1E293B;--teal:#0F766E;--bright:#14B8A6;--cloud:#F8FAFC;--steel:#94A3B8;--muted:#64748B;--red:#EF4444}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 75% 15%,rgba(20,184,166,.18),transparent 30%),var(--midnight);color:var(--cloud);font-family:Arial,sans-serif}.card{width:min(460px,92vw);background:rgba(30,41,59,.86);border:1px solid rgba(148,163,184,.18);border-radius:22px;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.28)}.brand{font-size:34px;font-weight:900;margin-bottom:8px}.brand span{color:var(--bright)}h1{margin:0 0 8px;font-size:32px}.sub{color:var(--steel);margin:0 0 22px;line-height:1.5}label{display:block;color:var(--steel);font-size:12px;text-transform:uppercase;font-weight:900;margin:14px 0 6px}input{width:100%;background:#0b1220;color:var(--cloud);border:1px solid rgba(148,163,184,.25);border-radius:10px;padding:13px;font-size:16px}.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:0;border-radius:10px;padding:12px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--bright),var(--teal));color:white}.btn.secondary{background:transparent;border:1px solid rgba(248,250,252,.35)}.msg{min-height:22px;color:var(--steel);margin-top:16px}.error{color:#fca5a5}.nav{margin-top:22px}.nav a{color:var(--bright);font-weight:900;text-decoration:none}
+:root{--midnight:#0B1220;--slate:#1E293B;--teal:#0F766E;--bright:#14B8A6;--cloud:#F8FAFC;--steel:#94A3B8;--muted:#64748B;--red:#EF4444}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 75% 15%,rgba(20,184,166,.18),transparent 30%),var(--midnight);color:var(--cloud);font-family:Arial,sans-serif}.card{width:min(540px,92vw);background:rgba(30,41,59,.86);border:1px solid rgba(148,163,184,.18);border-radius:22px;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.28)}.brand{font-size:34px;font-weight:900;margin-bottom:8px}.brand span{color:var(--bright)}h1{margin:0 0 8px;font-size:32px}.sub{color:var(--steel);margin:0 0 22px;line-height:1.5}label{display:block;color:var(--steel);font-size:12px;text-transform:uppercase;font-weight:900;margin:14px 0 6px}input,select{width:100%;background:#0b1220;color:var(--cloud);border:1px solid rgba(148,163,184,.25);border-radius:10px;padding:13px;font-size:16px}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:0;border-radius:10px;padding:12px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--bright),var(--teal));color:white}.btn.secondary{background:transparent;border:1px solid rgba(248,250,252,.35)}.msg{min-height:22px;color:var(--steel);margin-top:16px}.error{color:#fca5a5}.nav{margin-top:22px}.nav a{color:var(--bright);font-weight:900;text-decoration:none}.create-fields{border-top:1px solid rgba(148,163,184,.18);margin-top:20px;padding-top:12px}@media(max-width:640px){.split{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -17,6 +17,10 @@
 <form id="accountForm">
 <label>Email</label><input id="email" type="email" required autocomplete="email">
 <label>Password</label><input id="password" type="password" required autocomplete="current-password" minlength="6">
+<div class="create-fields">
+<div class="split"><div><label>First Name</label><input id="firstName" autocomplete="given-name" placeholder="Mike"></div><div><label>Last Name</label><input id="lastName" autocomplete="family-name" placeholder="Nichols"></div></div>
+<label>Account Type</label><select id="accountType"><option value="parent">Parent / Guardian</option><option value="coach">Coach</option><option value="athlete">Athlete</option><option value="organization">Organization</option></select>
+</div>
 <div class="row">
 <button class="btn" type="button" id="signInBtn">Sign In</button>
 <button class="btn secondary" type="button" id="createBtn">Create Account</button>
@@ -34,6 +38,9 @@
 <script>
 const email = document.getElementById('email');
 const password = document.getElementById('password');
+const firstName = document.getElementById('firstName');
+const lastName = document.getElementById('lastName');
+const accountType = document.getElementById('accountType');
 const msg = document.getElementById('message');
 const logoutBtn = document.getElementById('logoutBtn');
 const params = new URLSearchParams(window.location.search);
@@ -41,12 +48,32 @@ const next = params.get('next') || '/dashboard.html';
 document.getElementById('backLink').href = next;
 function setMsg(text, isError=false){msg.textContent=text;msg.className=isError?'msg error':'msg'}
 function goNext(){ setTimeout(()=>location.href=next,600); }
+async function saveProfile(user){
+  const displayName = `${firstName.value.trim()} ${lastName.value.trim()}`.trim();
+  if(displayName) await user.updateProfile({displayName});
+  await RBIAuth.db.collection('users').doc(user.uid).set({
+    email:user.email || '',
+    firstName:firstName.value.trim(),
+    lastName:lastName.value.trim(),
+    displayName,
+    accountType:accountType.value,
+    role:accountType.value,
+    onboardingComplete:false,
+    updatedAt:firebase.firestore.FieldValue.serverTimestamp(),
+    createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  }, {merge:true});
+}
 document.getElementById('signInBtn').addEventListener('click', async () => {
   try { await RBIAuth.auth.signInWithEmailAndPassword(email.value, password.value); setMsg('Signed in. Redirecting...'); goNext(); }
   catch(e){ setMsg(e.message, true); }
 });
 document.getElementById('createBtn').addEventListener('click', async () => {
-  try { await RBIAuth.auth.createUserWithEmailAndPassword(email.value, password.value); setMsg('Account created. Redirecting...'); goNext(); }
+  try {
+    if(!firstName.value.trim() || !lastName.value.trim()){ setMsg('First and last name are required to create an RBI account.', true); return; }
+    const cred = await RBIAuth.auth.createUserWithEmailAndPassword(email.value, password.value);
+    await saveProfile(cred.user);
+    setMsg('Account created. Redirecting...'); goNext();
+  }
   catch(e){ setMsg(e.message, true); }
 });
 logoutBtn.addEventListener('click', async () => { await RBIAuth.auth.signOut(); setMsg('Signed out.'); });
