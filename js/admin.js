@@ -1,12 +1,22 @@
 const el = id => document.getElementById(id);
 const esc = v => String(v || '').replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
 
+function showPage(id) {
+  document.documentElement.classList.remove('auth-checking');
+  el(id).classList.remove('hidden');
+}
+
+function showError(message) {
+  document.documentElement.classList.remove('auth-checking');
+  el('blocked').classList.remove('hidden');
+  el('blocked').innerHTML = `<h1>Admin console error</h1><p class="small">${esc(message)}</p><p><a class="auth-link" href="/dashboard.html">Back to Workspace</a></p>`;
+}
+
 async function checkAdmin(user) {
   const snap = await RBIAuth.db.collection('users').doc(user.uid).get();
   const profile = snap.exists ? snap.data() : {};
   if (!profile.isAdmin) {
-    document.documentElement.classList.remove('auth-checking');
-    el('blocked').classList.remove('hidden');
+    showPage('blocked');
     return false;
   }
   el('adminApp').style.display = 'block';
@@ -16,7 +26,7 @@ async function checkAdmin(user) {
 
 async function loadUsers() {
   const box = el('usersList');
-  const snap = await RBIAuth.db.collection('users').orderBy('createdAt', 'desc').limit(50).get();
+  const snap = await RBIAuth.db.collection('users').limit(50).get();
   if (snap.empty) {
     box.innerHTML = '<p class="small">No users found.</p>';
     return;
@@ -47,12 +57,12 @@ async function loadAthletes() {
 }
 
 RBIAuth.auth.onAuthStateChanged(async user => {
-  if (!user) return;
-  const ok = await checkAdmin(user);
-  if (!ok) return;
   try {
+    if (!user) return;
+    const ok = await checkAdmin(user);
+    if (!ok) return;
     await Promise.all([loadUsers(), loadAthletes()]);
   } catch (e) {
-    el('usersList').innerHTML = `<p class="small">Unable to load admin data: ${esc(e.message)}</p>`;
+    showError(e.message || 'Unknown admin console error.');
   }
 });
