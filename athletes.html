@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Athletes | Rogue Baseball IQ</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/athletes.css">
+</head>
+<body>
+<div class="wrap">
+<nav class="nav">
+  <div class="nav-left"><a href="/">Home</a><a href="/dashboard.html">RBI Workspace</a><a href="/pitchguard.html">PitchGuard</a></div>
+  <div class="auth-box" data-auth-status><a class="auth-link" href="/account.html">Sign In</a></div>
+</nav>
+<header>
+  <h1>Athlete Profiles</h1>
+  <p class="sub">Create persistent athlete records that future RBI tools can attach to: PitchGuard workload, Pathway development plans, PitchLab mechanics, SwingLab hitting, and ScoutHub notes.</p>
+</header>
+<div class="grid">
+<section class="panel">
+  <h2>Add Athlete</h2>
+  <form id="athleteForm">
+    <div class="field"><label>Name</label><input id="name" required placeholder="Jackson Nichols"></div>
+    <div class="row">
+      <div class="field"><label>Birthdate</label><input id="birthdate" type="date"></div>
+      <div class="field"><label>Grad Year</label><input id="gradYear" placeholder="2030"></div>
+    </div>
+    <div class="field"><label>Team</label><input id="team" placeholder="NW Show 15U"></div>
+    <div class="row">
+      <div class="field"><label>Primary Position</label><input id="primaryPosition" placeholder="P"></div>
+      <div class="field"><label>Secondary Position</label><input id="secondaryPosition" placeholder="OF"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>Bats</label><select id="bats"><option value="R">R</option><option value="L">L</option><option value="S">S</option></select></div>
+      <div class="field"><label>Throws</label><select id="throws"><option value="R">R</option><option value="L">L</option></select></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>Height</label><input id="height" placeholder="6'3&quot;"></div>
+      <div class="field"><label>Weight</label><input id="weight" placeholder="165"></div>
+    </div>
+    <div class="actions"><button class="btn" type="submit">Save Athlete</button><a class="btn secondary" href="/account.html">Account</a></div>
+    <div id="msg" class="msg"></div>
+  </form>
+</section>
+<section class="panel">
+  <h2>Your Athletes</h2>
+  <div id="athleteList" class="list"><div class="empty">Loading athletes...</div></div>
+</section>
+</div>
+<section style="margin-top:20px" id="profileOutput"></section>
+</div>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="/js/firebase-config.js"></script>
+<script src="/js/rbi-auth.js"></script>
+<script src="/js/athletes.js"></script>
+</body>
+</html>
