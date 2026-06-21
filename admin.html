@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" class="auth-checking">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBI Admin</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<style>
+.auth-checking body{visibility:hidden}:root{--bg:#0B1220;--card:#1E293B;--teal:#14B8A6;--text:#F8FAFC;--muted:#94A3B8;--line:rgba(148,163,184,.18)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}.wrap{max-width:1200px;margin:auto;padding:28px}.nav{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:26px}.nav a,.auth-link{color:var(--teal);font-weight:900;text-decoration:none;background:transparent;border:0;cursor:pointer}.brand{font-size:30px;font-weight:900}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{background:rgba(30,41,59,.82);border:1px solid var(--line);border-radius:18px;padding:22px}.panel h2{margin:0 0 14px}.small{color:var(--muted);font-size:13px;word-break:break-word}.item{background:#0b1220;border:1px solid rgba(148,163,184,.16);border-radius:14px;padding:14px;margin-bottom:10px}.item b{display:block;margin-bottom:5px}.pill{display:inline-block;border:1px solid rgba(20,184,166,.38);color:var(--teal);border-radius:999px;padding:4px 8px;font-size:12px;font-weight:900;margin-top:8px}.blocked{max-width:600px;margin:80px auto;background:rgba(30,41,59,.82);border:1px solid var(--line);border-radius:18px;padding:26px}.hidden{display:none}@media(max-width:900px){.grid{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap" id="adminApp" style="display:none">
+<nav class="nav"><div class="brand">RBI Admin</div><div><a href="/dashboard.html">Workspace</a> · <a href="/athletes.html">Athletes</a> · <a href="/">Home</a> · <span data-auth-status></span></div></nav>
+<p class="small">Founder/admin console for reviewing accounts and athlete records.</p>
+<div class="grid">
+<section class="panel"><h2>Users</h2><div id="usersList"><p class="small">Loading users...</p></div></section>
+<section class="panel"><h2>Athletes</h2><div id="athletesList"><p class="small">Loading athletes...</p></div></section>
+</div>
+</div>
+<div class="blocked hidden" id="blocked"><h1>Admin access required</h1><p class="small">This page is only available to RBI founder/admin accounts.</p><p><a class="auth-link" href="/dashboard.html">Back to Workspace</a></p></div>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="/js/firebase-config.js"></script>
+<script src="/js/rbi-auth.js"></script>
+<script>RBIAuth.requireAuth();</script>
+<script src="/js/admin.js"></script>
+</body>
+</html>
