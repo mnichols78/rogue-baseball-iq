@@ -10,6 +10,11 @@ const RBIAuth = (() => {
     return 'Account';
   }
 
+  function accountUrl(nextPath) {
+    const next = nextPath || `${window.location.pathname}${window.location.search}`;
+    return `/account.html?next=${encodeURIComponent(next)}`;
+  }
+
   function wireAuthUi() {
     const nodes = document.querySelectorAll('[data-auth-status]');
     auth.onAuthStateChanged(async (user) => {
@@ -17,7 +22,7 @@ const RBIAuth = (() => {
         if (user) {
           node.innerHTML = `<span class="auth-name">${displayName(user)}</span> <button class="auth-link" data-logout>Logout</button>`;
         } else {
-          node.innerHTML = `<a class="auth-link" href="/account.html">Sign In</a>`;
+          node.innerHTML = `<a class="auth-link" href="${accountUrl()}">Sign In</a>`;
         }
       });
       document.querySelectorAll('[data-logout]').forEach((button) => {
@@ -39,13 +44,13 @@ const RBIAuth = (() => {
     });
   }
 
-  function requireAuth(redirect = '/account.html') {
+  function requireAuth() {
     auth.onAuthStateChanged((user) => {
-      if (!user) window.location.href = redirect;
+      if (!user) window.location.href = accountUrl();
     });
   }
 
-  return { app, auth, db, wireAuthUi, requireAuth, displayName };
+  return { app, auth, db, wireAuthUi, requireAuth, displayName, accountUrl };
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
