@@ -45,8 +45,14 @@ const RBIAuth = (() => {
   }
 
   function requireAuth() {
+    document.documentElement.classList.add('auth-checking');
     auth.onAuthStateChanged((user) => {
-      if (!user) window.location.href = accountUrl();
+      if (!user) {
+        window.location.replace(accountUrl());
+        return;
+      }
+      document.documentElement.classList.remove('auth-checking');
+      document.documentElement.classList.add('auth-ready');
     });
   }
 
