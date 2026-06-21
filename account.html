@@ -13,7 +13,7 @@
 <main class="card">
 <div class="brand">RB<span>I</span></div>
 <h1>RBI Account</h1>
-<p class="sub">Sign in or create an account to save PitchGuard logs and use RBI across devices.</p>
+<p class="sub">Sign in or create an account to save athlete profiles, PitchGuard logs, and future RBI data across devices.</p>
 <form id="accountForm">
 <label>Email</label><input id="email" type="email" required autocomplete="email">
 <label>Password</label><input id="password" type="password" required autocomplete="current-password" minlength="6">
@@ -24,7 +24,7 @@
 </div>
 </form>
 <div id="message" class="msg"></div>
-<div class="nav"><a href="/dashboard.html">Back to RBI Workspace →</a></div>
+<div class="nav"><a id="backLink" href="/dashboard.html">Back to RBI Workspace →</a></div>
 </main>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -36,13 +36,17 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const msg = document.getElementById('message');
 const logoutBtn = document.getElementById('logoutBtn');
+const params = new URLSearchParams(window.location.search);
+const next = params.get('next') || '/dashboard.html';
+document.getElementById('backLink').href = next;
 function setMsg(text, isError=false){msg.textContent=text;msg.className=isError?'msg error':'msg'}
+function goNext(){ setTimeout(()=>location.href=next,600); }
 document.getElementById('signInBtn').addEventListener('click', async () => {
-  try { await RBIAuth.auth.signInWithEmailAndPassword(email.value, password.value); setMsg('Signed in. Redirecting...'); setTimeout(()=>location.href='/dashboard.html',600); }
+  try { await RBIAuth.auth.signInWithEmailAndPassword(email.value, password.value); setMsg('Signed in. Redirecting...'); goNext(); }
   catch(e){ setMsg(e.message, true); }
 });
 document.getElementById('createBtn').addEventListener('click', async () => {
-  try { await RBIAuth.auth.createUserWithEmailAndPassword(email.value, password.value); setMsg('Account created. Redirecting...'); setTimeout(()=>location.href='/dashboard.html',600); }
+  try { await RBIAuth.auth.createUserWithEmailAndPassword(email.value, password.value); setMsg('Account created. Redirecting...'); goNext(); }
   catch(e){ setMsg(e.message, true); }
 });
 logoutBtn.addEventListener('click', async () => { await RBIAuth.auth.signOut(); setMsg('Signed out.'); });
