@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBI Account</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<style>
+:root{--midnight:#0B1220;--slate:#1E293B;--teal:#0F766E;--bright:#14B8A6;--cloud:#F8FAFC;--steel:#94A3B8;--muted:#64748B;--red:#EF4444}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 75% 15%,rgba(20,184,166,.18),transparent 30%),var(--midnight);color:var(--cloud);font-family:Arial,sans-serif}.card{width:min(460px,92vw);background:rgba(30,41,59,.86);border:1px solid rgba(148,163,184,.18);border-radius:22px;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.28)}.brand{font-size:34px;font-weight:900;margin-bottom:8px}.brand span{color:var(--bright)}h1{margin:0 0 8px;font-size:32px}.sub{color:var(--steel);margin:0 0 22px;line-height:1.5}label{display:block;color:var(--steel);font-size:12px;text-transform:uppercase;font-weight:900;margin:14px 0 6px}input{width:100%;background:#0b1220;color:var(--cloud);border:1px solid rgba(148,163,184,.25);border-radius:10px;padding:13px;font-size:16px}.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:0;border-radius:10px;padding:12px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--bright),var(--teal));color:white}.btn.secondary{background:transparent;border:1px solid rgba(248,250,252,.35)}.msg{min-height:22px;color:var(--steel);margin-top:16px}.error{color:#fca5a5}.nav{margin-top:22px}.nav a{color:var(--bright);font-weight:900;text-decoration:none}
+</style>
+</head>
+<body>
+<main class="card">
+<div class="brand">RB<span>I</span></div>
+<h1>RBI Account</h1>
+<p class="sub">Sign in or create an account to save PitchGuard logs and use RBI across devices.</p>
+<form id="accountForm">
+<label>Email</label><input id="email" type="email" required autocomplete="email">
+<label>Password</label><input id="password" type="password" required autocomplete="current-password" minlength="6">
+<div class="row">
+<button class="btn" type="button" id="signInBtn">Sign In</button>
+<button class="btn secondary" type="button" id="createBtn">Create Account</button>
+<button class="btn secondary" type="button" id="logoutBtn" style="display:none">Logout</button>
+</div>
+</form>
+<div id="message" class="msg"></div>
+<div class="nav"><a href="/dashboard.html">Back to RBI Workspace →</a></div>
+</main>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="/js/firebase-config.js"></script>
+<script src="/js/rbi-auth.js"></script>
+<script>
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const msg = document.getElementById('message');
+const logoutBtn = document.getElementById('logoutBtn');
+function setMsg(text, isError=false){msg.textContent=text;msg.className=isError?'msg error':'msg'}
+document.getElementById('signInBtn').addEventListener('click', async () => {
+  try { await RBIAuth.auth.signInWithEmailAndPassword(email.value, password.value); setMsg('Signed in. Redirecting...'); setTimeout(()=>location.href='/dashboard.html',600); }
+  catch(e){ setMsg(e.message, true); }
+});
+document.getElementById('createBtn').addEventListener('click', async () => {
+  try { await RBIAuth.auth.createUserWithEmailAndPassword(email.value, password.value); setMsg('Account created. Redirecting...'); setTimeout(()=>location.href='/dashboard.html',600); }
+  catch(e){ setMsg(e.message, true); }
+});
+logoutBtn.addEventListener('click', async () => { await RBIAuth.auth.signOut(); setMsg('Signed out.'); });
+RBIAuth.auth.onAuthStateChanged((user)=>{logoutBtn.style.display=user?'inline-flex':'none'; if(user) setMsg('Signed in as '+user.email);});
+</script>
+</body>
+</html>
