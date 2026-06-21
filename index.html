@@ -15,7 +15,17 @@
   <style>
     .product-suite { grid-template-columns: repeat(3, 1fr); }
     .product-suite .card:nth-child(4), .product-suite .card:nth-child(5), .product-suite .card:nth-child(6) { grid-column: auto; }
-    @media (max-width: 980px) { .product-suite { grid-template-columns: 1fr; } }
+    .platform-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+    .step-card { background:rgba(30,41,59,.78); border:1px solid rgba(148,163,184,.16); border-radius:16px; padding:28px; }
+    .step-number { width:44px; height:44px; display:grid; place-items:center; border-radius:50%; background:rgba(20,184,166,.16); color:#14B8A6; font-weight:900; margin-bottom:18px; }
+    .step-card h3 { margin:0 0 10px; font-size:24px; }
+    .step-card p { color:#94A3B8; margin:0; }
+    .ecosystem { background:rgba(30,41,59,.72); border:1px solid rgba(148,163,184,.16); border-radius:22px; padding:30px; max-width:1000px; }
+    .ecosystem-row { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin:14px 0; }
+    .node { border:1px solid rgba(20,184,166,.38); background:rgba(11,18,32,.76); color:#F8FAFC; border-radius:999px; padding:12px 18px; font-weight:900; }
+    .node.primary { background:linear-gradient(135deg,#14B8A6,#0F766E); border-color:transparent; }
+    .connector { text-align:center; color:#14B8A6; font-size:26px; line-height:1; }
+    @media (max-width: 980px) { .product-suite, .platform-steps { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -29,11 +39,10 @@
       </a>
       <div class="links">
         <a href="#top">Home</a>
-        <a href="#pitchguard">PitchGuard</a>
-        <a href="#pitchlab">PitchLab</a>
-        <a href="#scouthub">ScoutHub</a>
-        <a href="/dashboard.html">Dashboard</a>
-        <a href="#early-access" class="nav-cta">Early Access</a>
+        <a href="#products">Products</a>
+        <a href="/athletes.html">Athletes</a>
+        <a href="/dashboard.html">Workspace</a>
+        <a href="/account.html" class="nav-cta">Sign In</a>
       </div>
     </nav>
 
@@ -47,10 +56,10 @@
           <div class="mini-pill"><span class="mini-icon">⌖</span>Prepare</div>
           <div class="mini-pill"><span class="mini-icon">▥</span>Operate</div>
         </div>
-        <p>A baseball operating system for workload, player development, scouting, athlete pathways, and team execution.</p>
+        <p>The baseball operating system for player development: accounts, athlete profiles, workload tracking, scouting, mechanics, pathways, and team execution.</p>
         <div class="actions">
-          <a class="button" href="/dashboard.html">Explore RBI →</a>
-          <a class="button secondary" href="#early-access">Get Early Access</a>
+          <a class="button" href="/dashboard.html">Launch RBI Workspace →</a>
+          <a class="button secondary" href="/account.html">Create RBI Account</a>
         </div>
       </div>
 
@@ -62,11 +71,26 @@
         <span class="dot two"></span>
         <span class="dot three"></span>
         <div class="metrics">
-          <div class="metric"><label>Pitch Efficiency</label><strong>84%</strong><i></i></div>
-          <div class="metric"><label>Hip/Shoulder Separation</label><strong>37°</strong><i></i></div>
-          <div class="metric"><label>Attack Angle</label><strong>+12°</strong></div>
+          <div class="metric"><label>PitchGuard</label><strong>Live</strong><i></i></div>
+          <div class="metric"><label>Athlete Profiles</label><strong>Cloud</strong><i></i></div>
+          <div class="metric"><label>RBI Platform</label><strong>v0.8</strong></div>
         </div>
         <div class="bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-dark" id="how">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="kicker">How RBI Works</p>
+        <h2>One account. Athlete-centered tools. Season-long intelligence.</h2>
+        <p>RBI is built around the athlete profile first, then every product attaches useful data to that permanent record.</p>
+      </div>
+      <div class="platform-steps">
+        <div class="step-card"><div class="step-number">1</div><h3>Create Account</h3><p>Sign in once and use the same RBI account across the workspace, athlete profiles, and product modules.</p></div>
+        <div class="step-card"><div class="step-number">2</div><h3>Build Athlete Profiles</h3><p>Create persistent athlete records that can follow players across seasons, teams, and development stages.</p></div>
+        <div class="step-card"><div class="step-number">3</div><h3>Use RBI Products</h3><p>PitchGuard, Pathway, PitchLab, SwingLab, ScoutHub, and RBI OS all connect back to the athlete.</p></div>
       </div>
     </div>
   </section>
@@ -83,85 +107,70 @@
           <div class="icon">✓</div>
           <h3>PitchGuard</h3>
           <p>Log outings, manage workload, and support pitcher availability decisions using MLB Pitch Smart-style guidance.</p>
-          <ul>
-            <li>Pitch counts</li>
-            <li>Rest guidance</li>
-            <li>Tournament workload planning</li>
-            <li>Usage history</li>
-          </ul>
+          <ul><li>Pitch counts</li><li>Rest guidance</li><li>Tournament workload planning</li><li>Usage history</li></ul>
           <a class="learn" href="/pitchguard.html">Open PitchGuard →</a>
+        </div>
+        <div class="card" id="pathway">
+          <div class="icon">◈</div>
+          <h3>Pathway</h3>
+          <p>Build the long-term athlete profile and development timeline.</p>
+          <ul><li>Cloud athlete profiles</li><li>Goals and milestones</li><li>Growth tracking</li><li>Development priorities</li></ul>
+          <a class="learn" href="/athletes.html">Manage Athletes →</a>
         </div>
         <div class="card" id="pitchlab">
           <div class="icon">⌖</div>
           <h3>PitchLab</h3>
           <p>Analyze pitching mechanics and prescribe drills.</p>
-          <ul>
-            <li>Pitch analysis</li>
-            <li>Mechanical checkpoints</li>
-            <li>Drill mapping</li>
-            <li>Practice plans</li>
-          </ul>
-          <a class="learn" href="#early-access">Learn More →</a>
+          <ul><li>Pitch analysis</li><li>Mechanical checkpoints</li><li>Drill mapping</li><li>Practice plans</li></ul>
+          <a class="learn" href="/dashboard.html">Planned →</a>
         </div>
         <div class="card" id="swinglab">
           <div class="icon">↗</div>
           <h3>SwingLab</h3>
           <p>Analyze hitting mechanics and prescribe drills.</p>
-          <ul>
-            <li>Swing analysis</li>
-            <li>Mechanical checkpoints</li>
-            <li>Drill mapping</li>
-            <li>Practice plans</li>
-          </ul>
-          <a class="learn" href="#early-access">Learn More →</a>
-        </div>
-        <div class="card" id="pathway">
-          <div class="icon">◈</div>
-          <h3>Pathway</h3>
-          <p>Build long-term development plans for athletes.</p>
-          <ul>
-            <li>Multi-team athlete profile</li>
-            <li>Goals and milestones</li>
-            <li>Growth tracking</li>
-            <li>Development priorities</li>
-          </ul>
-          <a class="learn" href="#early-access">Learn More →</a>
+          <ul><li>Swing analysis</li><li>Mechanical checkpoints</li><li>Drill mapping</li><li>Practice plans</li></ul>
+          <a class="learn" href="/dashboard.html">Planned →</a>
         </div>
         <div class="card" id="scouthub">
           <div class="icon">▥</div>
           <h3>ScoutHub</h3>
           <p>Build scouting reports and game plans.</p>
-          <ul>
-            <li>Opponent tendencies</li>
-            <li>Game plans</li>
-            <li>Tournament prep</li>
-            <li>Matchup notes</li>
-          </ul>
-          <a class="learn" href="#early-access">Learn More →</a>
+          <ul><li>Opponent tendencies</li><li>Game plans</li><li>Tournament prep</li><li>Matchup notes</li></ul>
+          <a class="learn" href="/dashboard.html">Planned →</a>
         </div>
         <div class="card" id="rbios">
           <div class="icon">▣</div>
           <h3>RBI OS</h3>
           <p>The operating system for baseball organizations.</p>
-          <ul>
-            <li>Team dashboard</li>
-            <li>Lineups and planning</li>
-            <li>Player profiles</li>
-            <li>Reports</li>
-          </ul>
-          <a class="learn" href="/dashboard.html">Open Dashboard →</a>
+          <ul><li>Team dashboard</li><li>Lineups and planning</li><li>Player profiles</li><li>Reports</li></ul>
+          <a class="learn" href="/dashboard.html">Open Workspace →</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-dark" id="ecosystem">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="kicker">Platform Model</p>
+        <h2>Everything connects back to the athlete.</h2>
+        <p>The athlete profile becomes the permanent record. Products add useful data over time instead of living as disconnected tools.</p>
+      </div>
+      <div class="ecosystem">
+        <div class="ecosystem-row"><div class="node primary">RBI Account</div></div>
+        <div class="connector">↓</div>
+        <div class="ecosystem-row"><div class="node primary">Athlete Profile</div></div>
+        <div class="connector">↓</div>
+        <div class="ecosystem-row"><div class="node">PitchGuard</div><div class="node">PitchLab</div><div class="node">SwingLab</div><div class="node">ScoutHub</div></div>
+        <div class="connector">↓</div>
+        <div class="ecosystem-row"><div class="node">Pathway Timeline</div><div class="node">RBI OS</div></div>
       </div>
     </div>
   </section>
 
   <section class="section-dark" id="why">
     <div class="section-inner">
-      <div class="section-head">
-        <p class="kicker">Why RBI</p>
-        <h2>Protect. Develop. Prepare. Operate.</h2>
-        <p>The goal is not to replace coaches. The goal is to give coaches and parents better decision support.</p>
-      </div>
+      <div class="section-head"><p class="kicker">Why RBI</p><h2>Protect. Develop. Prepare. Operate.</h2><p>The goal is not to replace coaches. The goal is to give coaches and parents better decision support.</p></div>
       <div class="why-grid">
         <div class="why-card"><h3>Protect</h3><p>Prevent overuse and manage athlete workload with clearer pitcher availability guidance.</p></div>
         <div class="why-card"><h3>Develop</h3><p>Build better players through objective feedback, mechanical checkpoints, and long-term development plans.</p></div>
@@ -172,47 +181,34 @@
 
   <section class="section-dark" id="roadmap">
     <div class="section-inner">
-      <div class="section-head">
-        <p class="kicker">Roadmap</p>
-        <h2>Build sequence</h2>
-        <p>RBI will stay narrow until the core tools are useful enough to test with real users.</p>
-      </div>
+      <div class="section-head"><p class="kicker">Roadmap</p><h2>Build sequence</h2><p>RBI will stay narrow until the core tools are useful enough to test with real users.</p></div>
       <div class="roadmap">
         <div class="roadmap-item"><strong>Public website</strong><span>Complete</span></div>
-        <div class="roadmap-item"><strong>RBI OS dashboard shell</strong><span>Complete</span></div>
-        <div class="roadmap-item"><strong>Early access list</strong><span>Next</span></div>
-        <div class="roadmap-item"><strong>PitchGuard Lite</strong><span>Live MVP</span></div>
-        <div class="roadmap-item"><strong>Pathway MVP</strong><span>Planned</span></div>
-        <div class="roadmap-item"><strong>PitchLab MVP</strong><span>Future</span></div>
-        <div class="roadmap-item"><strong>SwingLab MVP</strong><span>Future</span></div>
-        <div class="roadmap-item"><strong>ScoutHub MVP</strong><span>Future</span></div>
+        <div class="roadmap-item"><strong>RBI Workspace</strong><span>Complete</span></div>
+        <div class="roadmap-item"><strong>RBI Accounts</strong><span>Live</span></div>
+        <div class="roadmap-item"><strong>Athlete Profiles</strong><span>Live MVP</span></div>
+        <div class="roadmap-item"><strong>PitchGuard Local Log</strong><span>Live MVP</span></div>
+        <div class="roadmap-item"><strong>PitchGuard Cloud Sync</strong><span>Next</span></div>
+        <div class="roadmap-item"><strong>Pathway Timeline</strong><span>Planned</span></div>
+        <div class="roadmap-item"><strong>PitchLab / SwingLab / ScoutHub</strong><span>Future</span></div>
         <div class="roadmap-item"><strong>RBI OS v1</strong><span>Future</span></div>
       </div>
     </div>
   </section>
 
-  <section class="section-dark" id="early-access">
+  <section class="section-dark" id="launch">
     <div class="section-inner">
-      <div class="section-head">
-        <p class="kicker">Early Access</p>
-        <h2>Help shape the first RBI tools.</h2>
-        <p>Founding access will start with PitchGuard Lite and expand across the RBI product suite.</p>
-      </div>
-      <a class="button" href="mailto:founders@roguebaseballiq.com">Email Founders</a>
+      <div class="section-head"><p class="kicker">Launch</p><h2>Enter the RBI Workspace.</h2><p>Create an account, add an athlete, and begin building the foundation for season-long baseball intelligence.</p></div>
+      <a class="button" href="/dashboard.html">Launch RBI Workspace</a>
+      <a class="button secondary" href="/account.html" style="margin-left:12px">Sign In</a>
     </div>
   </section>
 
-  <footer class="footer">
-    <div>Rogue Baseball Intelligence</div>
-    <div>RBI OS v0.7</div>
-    <div>roguebaseballiq.com</div>
-  </footer>
+  <footer class="footer"><div>Rogue Baseball Intelligence</div><div>RBI Platform v0.8</div><div>roguebaseballiq.com</div></footer>
 
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js');
-      });
+      window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js'); });
     }
   </script>
 </body>
