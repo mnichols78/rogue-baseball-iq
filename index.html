@@ -14,12 +14,8 @@
   <link rel="stylesheet" href="/css/home.css">
   <style>
     .product-suite { grid-template-columns: repeat(3, 1fr); }
-    .product-suite .card:nth-child(4) { grid-column: 1 / 2; }
-    .product-suite .card:nth-child(5) { grid-column: 2 / 3; }
-    @media (max-width: 980px) {
-      .product-suite { grid-template-columns: 1fr; }
-      .product-suite .card:nth-child(4), .product-suite .card:nth-child(5) { grid-column: auto; }
-    }
+    .product-suite .card:nth-child(4), .product-suite .card:nth-child(5), .product-suite .card:nth-child(6) { grid-column: auto; }
+    @media (max-width: 980px) { .product-suite { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -51,7 +47,7 @@
           <div class="mini-pill"><span class="mini-icon">⌖</span>Prepare</div>
           <div class="mini-pill"><span class="mini-icon">▥</span>Operate</div>
         </div>
-        <p>A baseball operating system for workload, player development, scouting, and team execution.</p>
+        <p>A baseball operating system for workload, player development, scouting, athlete profiles, and team execution.</p>
         <div class="actions">
           <a class="button" href="/dashboard.html">Explore RBI →</a>
           <a class="button secondary" href="#early-access">Get Early Access</a>
@@ -79,8 +75,8 @@
     <div class="section-inner">
       <div class="section-head">
         <p class="kicker">Product Suite</p>
-        <h2>Five focused modules. One baseball operating system.</h2>
-        <p>RBI is being built as a practical software suite for protecting players, developing skills, preparing for opponents, and running teams.</p>
+        <h2>Six focused modules. One baseball operating system.</h2>
+        <p>RBI is being built as a practical software suite for protecting players, developing skills, preparing for opponents, tracking athletes, and running teams.</p>
       </div>
       <div class="cards product-suite">
         <div class="card" id="pitchguard">
@@ -119,6 +115,18 @@
           </ul>
           <a class="learn" href="#early-access">Learn More →</a>
         </div>
+        <div class="card" id="athletecard">
+          <div class="icon">◈</div>
+          <h3>AthleteCard</h3>
+          <p>The complete development profile for an athlete.</p>
+          <ul>
+            <li>Multi-team athlete profile</li>
+            <li>Goals and milestones</li>
+            <li>Growth tracking</li>
+            <li>Development priorities</li>
+          </ul>
+          <a class="learn" href="#early-access">Learn More →</a>
+        </div>
         <div class="card" id="scouthub">
           <div class="icon">▥</div>
           <h3>ScoutHub</h3>
@@ -137,8 +145,8 @@
           <p>The operating system for baseball organizations.</p>
           <ul>
             <li>Team dashboard</li>
+            <li>Lineups and planning</li>
             <li>Player profiles</li>
-            <li>Development plans</li>
             <li>Reports</li>
           </ul>
           <a class="learn" href="/dashboard.html">Open Dashboard →</a>
@@ -157,7 +165,7 @@
       <div class="why-grid">
         <div class="why-card"><h3>Protect</h3><p>Prevent overuse and manage athlete workload with clearer pitcher availability guidance.</p></div>
         <div class="why-card"><h3>Develop</h3><p>Build better players through objective feedback, mechanical checkpoints, and drill plans.</p></div>
-        <div class="why-card"><h3>Prepare</h3><p>Use scouting, opponent tendencies, and game plans to gain an edge before first pitch.</p></div>
+        <div class="why-card"><h3>Prepare</h3><p>Use scouting, athlete context, and game plans to gain an edge before first pitch.</p></div>
       </div>
     </div>
   </section>
@@ -174,8 +182,9 @@
         <div class="roadmap-item"><strong>RBI OS dashboard shell</strong><span>Complete</span></div>
         <div class="roadmap-item"><strong>Early access list</strong><span>Next</span></div>
         <div class="roadmap-item"><strong>PitchGuard Lite</strong><span>Planned</span></div>
-        <div class="roadmap-item"><strong>PitchLab MVP</strong><span>Planned</span></div>
-        <div class="roadmap-item"><strong>SwingLab MVP</strong><span>Planned</span></div>
+        <div class="roadmap-item"><strong>AthleteCard MVP</strong><span>Planned</span></div>
+        <div class="roadmap-item"><strong>PitchLab MVP</strong><span>Future</span></div>
+        <div class="roadmap-item"><strong>SwingLab MVP</strong><span>Future</span></div>
         <div class="roadmap-item"><strong>ScoutHub MVP</strong><span>Future</span></div>
         <div class="roadmap-item"><strong>RBI OS v1</strong><span>Future</span></div>
       </div>
