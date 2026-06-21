@@ -1,5 +1,5 @@
 window.RBI_FIREBASE_CONFIG = {
-  apiKey: "AIzaSyBBog6WZ0ezGscioFNL0Qq6GdsVv7AAO-s",
+  apiKey: "AIzaSyBBoq6WZ0ezGscioFNL0Qq6GdsVv7AAO-s",
   authDomain: "rogue-baseball-iq.firebaseapp.com",
   projectId: "rogue-baseball-iq",
   storageBucket: "rogue-baseball-iq.firebasestorage.app",
