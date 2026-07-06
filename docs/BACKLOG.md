@@ -24,6 +24,8 @@ The current goal is to make PitchGuard safe enough and useful enough for small-c
 - [ ] Create account.
 - [ ] Sign in.
 - [ ] Add athlete.
+- [ ] Open PitchGuard from selected athlete profile.
+- [ ] Confirm selected athlete preloads in PitchGuard.
 - [ ] Log PitchGuard outing.
 - [ ] Refresh browser and confirm data remains.
 - [ ] Log out and back in and confirm data remains.
@@ -48,8 +50,10 @@ The current goal is to make PitchGuard safe enough and useful enough for small-c
 
 ### Public copy cleanup
 
-- [ ] Update homepage roadmap: PitchGuard Cloud MVP should be marked live, not next.
-- [ ] Clarify next items: edit/delete, age rules, available-on date, QA/security verification.
+- [x] Update homepage roadmap: PitchGuard Cloud MVP should be marked live, not next.
+- [x] Clarify next items: edit/delete, age rules, available-on date, QA/security verification.
+- [x] Clarify Athlete Profiles as live foundation and Pathway as planned.
+- [x] Remove duplicate athlete creation from PitchGuard.
 
 ## P1 — Should do after P0
 
@@ -60,7 +64,8 @@ The current goal is to make PitchGuard safe enough and useful enough for small-c
 - [ ] Improve selected athlete state.
 - [ ] Add updatedAt on athlete updates.
 - [ ] Add basic validation for grad year, height, weight, and birthdate.
-- [ ] Add product count or linked records count instead of hard-coded `Products: 0`.
+- [x] Replace hard-coded `Products: 0` with clearer profile/source language.
+- [x] Add profile-specific PitchGuard link.
 
 ### PitchGuard user experience
 
@@ -153,3 +158,4 @@ Use this section to record completed items when they are moved out of the active
 - [x] Roadmap documentation exists.
 - [x] Architecture documentation exists.
 - [x] Decision log exists.
+- [x] Pathway / PitchGuard product boundaries clarified in code and copy.
