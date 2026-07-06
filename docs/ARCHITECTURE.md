@@ -1,4 +1,6 @@
-# RBI Architecture
+# Rogue Baseball IQ — Architecture
+
+Last updated: 2026-07-06
 
 ## Current architecture
 
@@ -17,104 +19,171 @@ Current stack:
 
 This project is not currently a framework app. It is not Next.js, React, Vue, or a full backend app at this stage.
 
-Known frontend structure:
+That is acceptable for the MVP. Static HTML/CSS/JS plus Firebase is enough to validate the product direction before adding framework complexity.
+
+## Known frontend structure
+
+Important pages:
+
+- `index.html` — public landing page and product positioning
+- `account.html` — sign in / create account
+- `dashboard.html` — RBI Workspace shell
+- `athletes.html` — athlete profile management
+- `pitchguard.html` — pitching workload tool
+
+Important JavaScript:
+
+- `js/firebase-config.js` — Firebase project configuration
+- `js/rbi-auth.js` — shared Firebase app/auth/db setup and auth UI behavior
+- `js/athletes.js` — athlete profile creation and rendering
+- `js/pitchguard.js` — athlete selection, outing logging, and workload calculations
+
+Important CSS:
+
+- `css/home.css`
+- `css/athletes.css`
+- `css/pitchguard.css`
+
+## Firebase
+
+### Firebase Auth
+
+Current sign-in method:
+
+- Email/password
+
+Account creation writes basic profile data to Firestore.
+
+### Firestore data model
+
+Current user-owned data model:
 
 ```text
-index.html
-admin.html
-js/rbi-auth.js
-js/admin.js
-css/
+users/{uid}
+  email
+  firstName
+  lastName
+  displayName
+  accountType
+  role
+  onboardingComplete
+  createdAt
+  updatedAt
+
+users/{uid}/athletes/{athleteId}
+  name
+  birthdate
+  gradYear
+  team
+  primaryPosition
+  secondaryPosition
+  bats
+  throws
+  height
+  weight
+  createdAt
+  updatedAt
+
+users/{uid}/athletes/{athleteId}/pitchguardOutings/{outingId}
+  date
+  opp
+  count
+  inn
+  notes
+  createdAt
 ```
 
-## Firebase integration
+## Auth pattern
 
-Firebase is initialized client-side through:
+Protected pages use `RBIAuth.requireAuth()`.
+
+If no user is signed in, the page redirects to:
 
 ```text
-/js/firebase-config.js
-/js/rbi-auth.js
+/account.html?next={currentPath}
 ```
 
-`rbi-auth.js` initializes:
+Shared auth UI uses `[data-auth-status]` nodes to show either:
 
-```js
-firebase.initializeApp(window.RBI_FIREBASE_CONFIG)
-firebase.auth()
-firebase.firestore()
-```
+- Sign In link
+- Signed-in user display name plus Logout button
 
-It also creates a user document if one does not exist.
+## Product model
 
-## Admin console
+RBI is intentionally athlete-centered.
 
-Admin page:
+The athlete profile is the permanent record. Product modules attach records back to the athlete.
+
+Current product linkage:
 
 ```text
-/admin.html
+RBI Account
+  -> Athlete Profile
+    -> PitchGuard outings
+    -> Future Pathway records
+    -> Future PitchLab records
+    -> Future SwingLab records
+    -> Future ScoutHub notes
 ```
 
-Admin JavaScript:
+## Current PitchGuard logic
+
+Current simplified rest function:
 
 ```text
-/js/admin.js
+0-20 pitches: 0 rest days
+21-35 pitches: 1 rest day
+36-50 pitches: 2 rest days
+51-65 pitches: 3 rest days
+66+ pitches: 4 rest days
 ```
 
-Current admin check:
+Current workload warnings:
 
-```js
-const snap = await RBIAuth.db.collection('users').doc(user.uid).get();
-const profile = snap.exists ? snap.data() : {};
-if (!profile.isAdmin) {
-  showPage('blocked');
-  return false;
-}
+- 7-day total >= 90: Light Usage / moderate workload
+- 7-day total >= 130: Caution / high workload
+- 30-day total >= 450: Monitor / elevated workload
+
+This logic is useful for MVP testing but must be replaced or expanded with age-specific rules before broader user testing.
+
+## Security requirements
+
+Before external testing, verify Firestore rules enforce user ownership.
+
+Minimum expected rule shape:
+
+```text
+users/{userId}: only authenticated user where request.auth.uid == userId
+users/{userId}/athletes/{athleteId}: same owner rule
+users/{userId}/athletes/{athleteId}/pitchguardOutings/{outingId}: same owner rule
 ```
 
-The admin page then loads:
+Do not invite outside testers until this is confirmed.
 
-```js
-RBIAuth.db.collection('users').limit(50).get()
-```
+## Why no backend yet
 
-and nested athlete records:
+A custom backend is not needed yet because:
 
-```js
-RBIAuth.db.collection('users').doc(userDoc.id).collection('athletes').limit(50).get()
-```
+- Auth is handled by Firebase.
+- User-owned data is simple.
+- There are no paid subscriptions yet.
+- There are no trusted server-side calculations yet.
+- There is no external API ingestion yet.
 
-## Firestore rules requirement
+A backend may be needed later for:
 
-For admin to work, Firestore rules must allow founder/admin users to read the necessary user and athlete documents.
+- Stripe billing
+- AI/video processing
+- GameChanger-style ingestion
+- Organization/team permissions
+- Role-based access control
+- Admin reporting
 
-Minimum admin helper pattern:
+## Near-term architecture improvements
 
-```js
-function isAdmin() {
-  return request.auth != null
-    && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
-}
-```
-
-Rules should not be left in a broad public-read/write state.
-
-## Deployment notes
-
-Cloudflare Pages serves the static files. A commit to `main` should trigger deployment if the Cloudflare GitHub integration is active.
-
-After changing Firestore rules, Cloudflare deployment is not enough. Firestore rules must be published in Firebase separately unless a future Firebase deployment workflow is added.
-
-## Current risk areas
-
-1. Firestore rules are not yet committed in the repo.
-2. Firebase project configuration may exist only in Firebase/Cloudflare settings.
-3. Athlete data is still nested under users.
-4. Product decisions have historically lived in conversation instead of the repo.
-
-## Architecture direction
-
-Short-term: keep the static app simple and stable.
-
-Medium-term: move toward a more durable data model before expanding modules.
-
-Long-term: consider a real app framework or backend only when the static/Firebase model becomes limiting. Do not prematurely rebuild unless the product requires it.
+1. Add Firestore rules documentation.
+2. Add a `docs/DATA_MODEL.md` later if the data model grows.
+3. Consider extracting PitchGuard rules into a separate JS module.
+4. Add edit/delete operations with predictable Firestore updates.
+5. Add `updatedAt` to PitchGuard outings.
+6. Add basic client-side validation and error states.
