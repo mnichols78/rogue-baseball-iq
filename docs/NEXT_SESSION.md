@@ -18,45 +18,55 @@ Before starting the next RBI work session, read these files in order:
 6. `docs/ARCHITECTURE.md`
 7. `docs/DECISIONS.md` if product or architecture direction is involved
 
-## Next recommended task
+## Immediate next task
 
-Verify Firestore security rules and document the result.
+Manual QA the Pathway / PitchGuard boundary cleanup branch.
+
+## Branch to test
+
+`cleanup/pathway-pitchguard-boundaries`
 
 ## Why this is next
 
-PitchGuard now stores user-owned athlete and outing data in Firestore. Before inviting outside testers, RBI must confirm that users can only access their own `users/{uid}` tree.
+The cleanup changed live navigation, product labels, athlete profile links, PitchGuard athlete selection, and public/workspace roadmap copy. The code has been updated, but the browser flow still needs manual verification before merge.
 
-## Expected work
+## QA checklist
 
-1. Inspect current Firebase/Firestore rules if accessible.
-2. Confirm intended rule shape:
+- [ ] Cloudflare preview deploys successfully.
+- [ ] Public homepage loads.
+- [ ] Workspace dashboard loads after sign-in.
+- [ ] Workspace clearly shows Athlete Profiles as foundation.
+- [ ] Workspace clearly shows Pathway as planned.
+- [ ] Athlete Profiles page loads.
+- [ ] Create or select an athlete profile.
+- [ ] Selected profile shows a PitchGuard link.
+- [ ] PitchGuard link opens `/pitchguard.html?athlete={athleteId}`.
+- [ ] PitchGuard preselects the correct athlete.
+- [ ] PitchGuard no longer shows its own Add Athlete form.
+- [ ] PitchGuard empty state points to Athlete Profiles when no athletes exist.
+- [ ] Save outing still writes under the selected athlete.
+- [ ] Refresh keeps selected athlete and outing history.
+- [ ] Mobile layout is acceptable.
 
-```text
-users/{userId}: authenticated user can only access own document where request.auth.uid == userId
-users/{userId}/athletes/{athleteId}: same owner rule
-users/{userId}/athletes/{athleteId}/pitchguardOutings/{outingId}: same owner rule
-```
+## After QA
 
-3. If rules are not available in the repo, add a proposed rules document or `firestore.rules` file.
-4. Update `docs/ARCHITECTURE.md` with the verified or proposed rules.
-5. Update `docs/BACKLOG.md` P0 security status.
-6. Add an `ENGINEERING_LOG.md` entry.
-7. Rewrite this file with the next task.
+If QA passes:
 
-## Likely files to inspect or modify
+1. Merge PR #1 first if still open, because the cleanup branch was based on project-memory docs.
+2. Merge the cleanup PR after PR #1.
+3. Start Firestore security rules verification.
 
-- `docs/ARCHITECTURE.md`
-- `docs/BACKLOG.md`
-- `docs/ENGINEERING_LOG.md`
-- `docs/NEXT_SESSION.md`
-- possible new file: `firestore.rules`
-- possible new file: `docs/FIRESTORE_RULES.md`
+If QA fails:
+
+1. Fix the failing branch behavior.
+2. Update `REQ-0001` QA status.
+3. Update this file again.
 
 ## Current P0 sequence
 
-1. Verify Firestore security rules.
-2. QA deployed account → athlete → PitchGuard persistence.
-3. Update homepage roadmap copy.
+1. QA Pathway / PitchGuard boundary cleanup branch.
+2. Verify Firestore security rules.
+3. QA deployed account → athlete → PitchGuard persistence.
 4. Add edit/delete for PitchGuard outings.
 5. Add edit/delete for athlete profiles.
 6. Add age-specific PitchGuard rules.
