@@ -1,12 +1,20 @@
-# RBI Roadmap
+# Rogue Baseball IQ — Roadmap
+
+Last updated: 2026-07-06
 
 ## Build philosophy
 
-Build narrow and useful before expanding. RBI should not become a six-module shell with shallow features. The first priority is a durable account and athlete foundation.
+Build narrow and useful before expanding.
+
+RBI should not become a six-module shell with shallow features. The first priority is a durable account and athlete foundation, followed by one trustworthy product module.
+
+Current best module to harden first: **PitchGuard**.
+
+Do not jump to PitchLab, SwingLab, ScoutHub, or monetization until PitchGuard is credible enough for small-circle testing.
 
 ## Phase 0 — Project memory and stability
 
-Status: In progress
+Status: In progress / mostly complete
 
 Goals:
 
@@ -19,141 +27,169 @@ Goals:
 
 Acceptance criteria:
 
-- `/docs` contains the current product and technical canon
-- Future sessions can begin by reading the docs and inspecting code
+- `/docs/PROJECT_STATUS.md` exists
+- `/docs/ROADMAP.md` exists
+- `/docs/ARCHITECTURE.md` exists
+- `/docs/DECISIONS.md` exists
+- `/docs/BACKLOG.md` exists
 
-## Phase 1 — Account and Athlete Foundation
+## Phase 1 — Foundation MVP
 
-Status: Started
+Status: Mostly complete
 
-Goals:
+Completed or live:
 
-- Firebase Auth sign-in
-- Firestore user profiles
-- Founder/admin account
+- Public landing page
+- Product positioning
+- PWA direction
+- Firebase project
+- Firebase Auth
+- Firestore connection
+- Account page
+- Protected page pattern
 - Athlete profile MVP
-- Admin console can view users and athletes
+- PitchGuard MVP
 
-Current gap:
+Remaining cleanup:
 
-- Athlete data currently appears nested under users
-- Need to move toward Athlete of Record model
+- Verify Firestore security rules
+- Confirm PWA manifest/service worker behavior
+- Clean outdated roadmap copy on public site
+- Add basic manual QA checklist
 
-Acceptance criteria:
+## Phase 2 — PitchGuard MVP hardening
 
-- Users can create accounts
-- Founder/admin can view user records
-- Athletes can be created and viewed
-- Athlete records do not depend permanently on one user-owned nested path
+Status: Current priority
 
-## Phase 2 — Athlete of Record refactor
+Goal: Turn PitchGuard from a working prototype into a trustworthy small-circle test product.
 
-Status: Recommended next
+### Required
 
-Goals:
+- Edit athlete profile
+- Delete athlete profile
+- Edit PitchGuard outing
+- Delete PitchGuard outing
+- Age-specific pitch count/rest rules
+- Next available date display
+- Clear explanation text for each recommendation
+- Better empty states
+- Basic error handling for failed Firestore reads/writes
+- Small safety/disclaimer language
 
-- Create canonical `athletes/{athleteId}` records
-- Create `athleteAccess/{accessId}` relationship records
-- Let parents, coaches, and athletes connect to the same athlete record
-- Prevent accidental duplicate athlete creation
+### Acceptance criteria
 
-Acceptance criteria:
+- User can create account, add athlete, log outing, refresh, and still see data.
+- User can log out, sign back in, and still see the same athlete and outing data.
+- User can correct mistaken athlete or outing entries.
+- User sees age-aware guidance.
+- User sees both the recommendation and the reason.
+- User understands RBI is decision support, not medical advice or an official governing body ruling.
+- Firestore rules prevent users from accessing each other’s data.
 
-- A user can create an athlete
-- The athlete is saved as a canonical athlete record
-- The creating user receives owner access
-- Admin can view canonical athletes and access relationships
-- Future modules can attach data by `athleteId`
-
-## Phase 3 — PitchGuard MVP hardening
-
-Status: Started but needs review
-
-Goals:
-
-- Pitch count logging
-- Rest guidance
-- Availability status
-- Pitching history by athlete
-- Tournament workload planning
-
-Acceptance criteria:
-
-- PitchGuard entries attach to canonical athlete IDs
-- A parent/coach can view workload history for athletes they can access
-- Rest guidance is understandable and conservative
-
-## Phase 4 — Pathway MVP hardening
-
-Status: Started but needs review
-
-Goals:
-
-- Athlete profile summary
-- Development priorities
-- Goals/milestones
-- Growth and physical profile tracking
-- Long-term timeline
-
-Acceptance criteria:
-
-- Pathway uses the canonical Athlete of Record
-- Notes and development fields persist
-- Coaches/parents can see the same athlete history when authorized
-
-## Phase 5 — PitchLab planning/build
+## Phase 3 — Pathway Timeline MVP
 
 Status: Planned
 
-Goals:
+Goal: Make the athlete profile feel like a persistent development record, not just a form.
 
-- Pitching mechanics analysis workflow
-- Upload or describe pitch video
-- Mechanical checkpoints
-- Drill recommendations
-- Connect findings to athlete profile
+Possible features:
 
-Acceptance criteria:
+- Goals
+- Milestones
+- Measurements over time
+- Position priorities
+- Development notes
+- Throwing/hitting/pitching focus areas
+- Simple coach/parent summary
 
-- PitchLab output attaches to athlete ID
-- Drill recommendations are constrained to approved RBI/Driveline-inspired drill mappings
-- Avoid unsupported medical claims
+Pathway should answer: what are we working on, why, and what changed?
 
-## Phase 6 — SwingLab planning/build
+## Phase 4 — ScoutHub MVP
 
-Status: Planned
+Status: Planned after PitchGuard and Pathway
 
-Goals:
+Goal: Tournament/opponent prep tool based on practical coach workflows.
 
-- Hitting mechanics analysis workflow
-- Swing checkpoints
-- Drill recommendations
-- Connect findings to athlete profile
+Possible features:
 
-## Phase 7 — ScoutHub planning/build
+- Opponent notes
+- Pitcher tendencies
+- Hitter tendencies
+- Defensive notes
+- Game plan summary
+- Tournament weekend prep sheet
 
-Status: Planned
+ScoutHub should start manual-first. GameChanger/image/stat extraction can come later.
 
-Goals:
+## Phase 5 — PitchLab MVP
 
-- Opponent scouting
-- Roster notes
-- Tendencies
-- Game plans
-- Tournament prep
+Status: Future
 
-## Phase 8 — RBI OS planning/build
+Goal: Pitching mechanics review and drill recommendation workflow.
 
-Status: Planned
+Important constraint: PitchLab should be drill mapping and coach support, not fake biomechanics certainty.
 
-Goals:
+Possible features:
 
-- Team dashboard
-- Roster management
-- Lineup/planning tools
-- Staff access
-- Reports
+- Upload or link short pitching video
+- Select observed mechanical issue
+- Map issue to drill set
+- Store review under athlete profile
+- Generate parent/coach-friendly practice plan
 
-## Near-term priority
+PitchLab should come after PitchGuard because workload tracking is easier to validate and safer to test.
 
-Do not build major new modules until the Athlete of Record model is decided and implemented or explicitly deferred. The risk of building on the wrong data model is higher than the value of adding more screens right now.
+## Phase 6 — SwingLab MVP
+
+Status: Future
+
+Goal: Hitting mechanics review and drill recommendation workflow.
+
+Likely follows the same model as PitchLab:
+
+- Observed issue
+- Drill mapping
+- Practice plan
+- Athlete-linked record
+
+## Phase 7 — RBI OS v1
+
+Status: Future
+
+Goal: Team/organization operating layer.
+
+Possible features:
+
+- Team roster
+- Player development dashboard
+- Team workload view
+- Tournament planning
+- Lineup notes
+- Coach handoff notes
+- Parent/player reports
+
+## Not now
+
+Avoid these until the core MVP earns them:
+
+- Paid subscriptions
+- Complex analytics dashboards
+- Native mobile apps
+- AI video analysis promises
+- Multi-organization hierarchy
+- Recruiting platform features
+- Public athlete profiles
+- Automated GameChanger ingestion
+
+## Current next 10 tasks
+
+1. Verify Firestore security rules.
+2. QA deployed account → athlete → PitchGuard persistence.
+3. Update homepage roadmap copy.
+4. Add edit/delete for PitchGuard outings.
+5. Add edit/delete for athlete profiles.
+6. Add age-specific PitchGuard rules.
+7. Add available-on date.
+8. Add safety/disclaimer language.
+9. Add a manual QA checklist.
+10. Invite one trusted tester only after the above is complete.
