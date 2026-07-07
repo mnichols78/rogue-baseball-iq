@@ -1,4 +1,4 @@
-let s = { pitchers: [], outings: [], sel: null };
+let s = { pitchers: [], outings: [], sel: null, importRows: [] };
 
 const $ = (x) => document.getElementById(x);
 
@@ -54,6 +54,50 @@ function calcAge(birthdate) {
   return a;
 }
 
+function normalizeName(v) {
+  return String(v || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+function findAthleteByName(name) {
+  const n = normalizeName(name);
+  if (!n) return null;
+  let exact = s.pitchers.find((p) => normalizeName(p.name) === n);
+  if (exact) return exact;
+  return s.pitchers.find((p) => {
+    const pn = normalizeName(p.name);
+    return pn.includes(n) || n.includes(pn);
+  }) || null;
+}
+
+function splitImportLine(line) {
+  const delimiter = line.includes('\t') ? '\t' : line.includes('|') ? '|' : ',';
+  return line.split(delimiter).map((x) => x.trim()).filter((x) => x !== '');
+}
+
+function looksLikeHeader(line) {
+  const l = line.toLowerCase();
+  return l.includes('pitcher') && (l.includes('pitch') || l.includes('count'));
+}
+
+function parseImportLine(line, index) {
+  const parts = splitImportLine(line);
+  if (parts.length < 4) return { index, raw: line, error: 'Need at least date, opponent, pitcher, and pitch count.' };
+
+  const date = parts[0];
+  const opp = parts[1] || '';
+  const pitcherName = parts[2] || '';
+  const count = Number(String(parts[3] || '').replace(/[^0-9]/g, ''));
+  const inn = parts[4] || '';
+  const notes = parts.slice(5).join(' | ');
+  const athlete = findAthleteByName(pitcherName);
+
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return { index, raw: line, date, opp, pitcherName, count, inn, notes, athleteId: athlete && athlete.id, error: 'Date must be YYYY-MM-DD.' };
+  if (!pitcherName) return { index, raw: line, date, opp, pitcherName, count, inn, notes, error: 'Pitcher name is required.' };
+  if (!count && count !== 0) return { index, raw: line, date, opp, pitcherName, count, inn, notes, athleteId: athlete && athlete.id, error: 'Pitch count is required.' };
+
+  return { index, raw: line, date, opp, pitcherName, count, inn, notes, athleteId: athlete ? athlete.id : '', error: '' };
+}
+
 function evalStatus() {
   const p = s.pitchers.find((x) => x.id === s.sel);
   const o = selectedOutings();
@@ -91,6 +135,33 @@ function evalStatus() {
   return [level, label, p.name, msg, last.count, seven, thirty];
 }
 
+function renderImportReview() {
+  const box = $('importReview');
+  if (!box) return;
+  if (!s.importRows.length) {
+    box.innerHTML = '';
+    return;
+  }
+
+  const options = '<option value="">Select athlete...</option>' + s.pitchers.map((p) => '<option value="' + p.id + '">' + esc(p.name) + '</option>').join('');
+  const rows = s.importRows.map((r, i) => {
+    const status = r.error ? '<span class="import-bad">' + esc(r.error) + '</span>' : (r.athleteId ? '<span class="import-good">Matched</span>' : '<span class="import-warn">Needs athlete</span>');
+    return '<tr><td>' + esc(r.date || '') + '</td><td>' + esc(r.opp || '') + '</td><td>' + esc(r.pitcherName || '') + '</td><td><select class="import-athlete" data-row="' + i + '">' + options.replace('value="' + r.athleteId + '"', 'value="' + r.athleteId + '" selected') + '</select></td><td>' + esc(r.count) + '</td><td>' + esc(r.inn || '') + '</td><td>' + esc(r.notes || '') + '</td><td>' + status + '</td></tr>';
+  }).join('');
+
+  box.innerHTML = '<div class="table-scroll"><table><tr><th>Date</th><th>Opponent</th><th>Imported Pitcher</th><th>Matched Athlete</th><th>Pitches</th><th>Innings</th><th>Notes</th><th>Status</th></tr>' + rows + '</table></div><button class="btn" type="button" id="saveImportBtn">Save Matched Rows</button>';
+
+  document.querySelectorAll('.import-athlete').forEach((select) => {
+    select.addEventListener('change', (e) => {
+      const row = Number(e.target.dataset.row);
+      s.importRows[row].athleteId = e.target.value;
+      s.importRows[row].error = s.importRows[row].error && e.target.value ? '' : s.importRows[row].error;
+    });
+  });
+
+  $('saveImportBtn').addEventListener('click', saveImportRows);
+}
+
 function render() {
   const pbox = $('pitchers');
   pbox.innerHTML = s.pitchers.length
@@ -109,10 +180,15 @@ function render() {
   const form = $('oform');
   Array.from(form.elements).forEach((el) => { el.disabled = !s.sel; });
 
+  const importControls = [$('importText'), $('parseImportBtn'), $('clearImportBtn')].filter(Boolean);
+  importControls.forEach((el) => { el.disabled = !s.pitchers.length; });
+
   const h = selectedOutings();
   $('history').innerHTML = h.length
     ? '<table><tr><th>Date</th><th>Opponent</th><th>Pitches</th><th>Innings</th><th>Notes</th></tr>' + h.map((o) => '<tr><td>' + o.date + '</td><td>' + esc(o.opp) + '</td><td><b>' + o.count + '</b></td><td>' + (o.inn || '—') + '</td><td>' + esc(o.notes) + '</td></tr>').join('') + '</table>'
     : '<p class="small">No outings logged for selected athlete.</p>';
+
+  renderImportReview();
 }
 
 async function loadCloud() {
@@ -168,6 +244,7 @@ async function addOuting(e) {
     count: Number($('count').value),
     inn: $('inn').value,
     notes: $('notes').value.trim(),
+    source: 'manual',
     createdAt: firebase.firestore.FieldValue.serverTimestamp()
   });
   e.target.reset();
@@ -176,9 +253,62 @@ async function addOuting(e) {
   render();
 }
 
+function parseImport() {
+  const text = $('importText').value.trim();
+  if (!text) {
+    $('importMsg').textContent = 'Paste pitching rows first.';
+    return;
+  }
+
+  const lines = text.split(/\r?\n/).map((x) => x.trim()).filter(Boolean).filter((line) => !looksLikeHeader(line));
+  s.importRows = lines.map(parseImportLine);
+  const matched = s.importRows.filter((r) => r.athleteId && !r.error).length;
+  $('importMsg').textContent = 'Parsed ' + s.importRows.length + ' row' + (s.importRows.length === 1 ? '' : 's') + '. Matched ' + matched + '.';
+  renderImportReview();
+}
+
+function clearImport() {
+  $('importText').value = '';
+  $('importMsg').textContent = '';
+  s.importRows = [];
+  renderImportReview();
+}
+
+async function saveImportRows() {
+  const valid = s.importRows.filter((r) => r.athleteId && !r.error && r.date && Number.isFinite(Number(r.count)));
+  if (!valid.length) {
+    $('importMsg').textContent = 'No valid matched rows to save.';
+    return;
+  }
+
+  const batch = RBIAuth.db.batch();
+  valid.forEach((r) => {
+    const ref = athleteRef(r.athleteId).collection('pitchguardOutings').doc();
+    batch.set(ref, {
+      date: r.date,
+      opp: r.opp || '',
+      count: Number(r.count),
+      inn: r.inn || '',
+      notes: r.notes || '',
+      importedPitcherName: r.pitcherName || '',
+      source: 'batch-import',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  });
+
+  await batch.commit();
+  $('importMsg').textContent = 'Saved ' + valid.length + ' imported outing' + (valid.length === 1 ? '' : 's') + '.';
+  s.importRows = [];
+  $('importText').value = '';
+  await loadOutings();
+  render();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   $('date').value = today();
   $('oform').onsubmit = addOuting;
+  $('parseImportBtn').addEventListener('click', parseImport);
+  $('clearImportBtn').addEventListener('click', clearImport);
   RBIAuth.auth.onAuthStateChanged((user) => {
     if (user) loadCloud();
   });
