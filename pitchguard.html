@@ -35,7 +35,7 @@
         <div class="stat"><span class="small">7-Day Total</span><br><b id="seven">0</b></div>
         <div class="stat"><span class="small">30-Day Total</span><br><b id="thirty">0</b></div>
       </div>
-      <h2>Log Outing</h2>
+      <h2>Log Single Outing</h2>
       <form id="oform">
         <div class="row"><div><label>Date</label><input id="date" type="date" required></div><div><label>Opponent</label><input id="opp" placeholder="Opponent"></div></div>
         <div class="row"><div><label>Pitch Count</label><input id="count" type="number" min="0" max="150" required></div><div><label>Innings</label><input id="inn" type="number" step="0.1" min="0"></div></div>
@@ -45,6 +45,18 @@
       </form>
     </section>
   </div>
+
+  <section class="panel" style="margin-top:20px">
+    <h2>Batch Import Pitching Data</h2>
+    <p class="small">Paste rows from GameChanger, a spreadsheet, or hand-typed notes. Best format: <b>Date, Opponent, Pitcher, Pitches, Innings, Notes</b>. Review matches before saving.</p>
+    <textarea id="importText" class="import-box" placeholder="2026-07-06, TBC Swofford, Jackson Nichols, 28, 1.0, Championship game\n2026-07-06 | TBC Swofford | West Smith | 42 | 2.1 | Pool play"></textarea>
+    <div class="actions-row">
+      <button class="btn" type="button" id="parseImportBtn">Parse Import</button>
+      <button class="btn secondary-btn" type="button" id="clearImportBtn">Clear</button>
+    </div>
+    <div id="importMsg" class="small import-msg"></div>
+    <div id="importReview"></div>
+  </section>
 
   <section class="panel" style="margin-top:20px"><h2>Pitch Log</h2><div id="history"></div></section>
 </div>
