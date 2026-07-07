@@ -2,6 +2,47 @@
 
 This file records meaningful RBI work sessions so the project can resume cleanly even when chat context is unavailable.
 
+## 2026-07-06 — PitchGuard batch import added
+
+### Completed
+
+- Added a PitchGuard Batch Import panel.
+- Added paste-and-parse support for comma, pipe, and tab delimited rows.
+- Added review-before-save table.
+- Added athlete name matching against existing Athlete Profiles.
+- Added manual athlete match correction before saving.
+- Added Firestore batch save for matched import rows.
+- Added `source: batch-import` for imported outings and `source: manual` for manual outings.
+- Added requirement document `REQ-0002`.
+
+### Changed files
+
+- `pitchguard.html`
+- `js/pitchguard.js`
+- `css/pitchguard.css`
+- `docs/requirements/REQ-0002-pitchguard-batch-import.md`
+- `docs/ENGINEERING_LOG.md`
+
+### Decisions
+
+- Batch import is review-before-save, not automatic scraping.
+- Imported pitcher names must map to existing athlete profiles before saving.
+- RBI will not create athletes automatically from imported names in this MVP.
+
+### QA
+
+- Code review only. Manual preview QA still required.
+
+### Risks / follow-ups
+
+- Duplicate detection is not implemented.
+- Import parser expects simple rows and will need real GameChanger samples to improve.
+- Mobile review table needs practical testing.
+
+### Next recommended task
+
+- QA the branch preview for athlete profile creation, PitchGuard preselection, batch import parsing, manual match correction, and batch save.
+
 ## 2026-07-06 — Pathway / PitchGuard boundary cleanup
 
 ### Completed
