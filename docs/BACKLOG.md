@@ -10,7 +10,7 @@ This backlog is the working memory for RBI. Keep it practical. Move items as the
 
 The current goal is to make PitchGuard safe enough and useful enough for small-circle testing.
 
-## P0 — Must do before outside testers
+## P0 — Must do before testers
 
 ### Security and data ownership
 
@@ -27,11 +27,12 @@ The current goal is to make PitchGuard safe enough and useful enough for small-c
 - [ ] Open PitchGuard from selected athlete profile.
 - [ ] Confirm selected athlete preloads in PitchGuard.
 - [ ] Log PitchGuard outing.
+- [ ] Batch import multiple pitching rows.
+- [ ] Confirm imported rows save under matched athletes.
 - [ ] Refresh browser and confirm data remains.
 - [ ] Log out and back in and confirm data remains.
 - [ ] Test on mobile browser.
 - [ ] Test empty states.
-- [ ] Test Firestore write failure/error behavior if possible.
 
 ### PitchGuard corrections
 
@@ -69,6 +70,7 @@ The current goal is to make PitchGuard safe enough and useful enough for small-c
 
 ### PitchGuard user experience
 
+- [x] Add batch import / review-before-save flow.
 - [ ] Improve outing history table on mobile.
 - [ ] Add sort/filter by date.
 - [ ] Add opponent optional field guidance.
@@ -159,3 +161,4 @@ Use this section to record completed items when they are moved out of the active
 - [x] Architecture documentation exists.
 - [x] Decision log exists.
 - [x] Pathway / PitchGuard product boundaries clarified in code and copy.
+- [x] PitchGuard batch import review flow implemented.
