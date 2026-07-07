@@ -20,7 +20,7 @@ Before starting the next RBI work session, read these files in order:
 
 ## Immediate next task
 
-Manual QA the Pathway / PitchGuard boundary cleanup branch.
+Manual QA the cleanup branch, including PitchGuard batch import.
 
 ## Branch to test
 
@@ -28,7 +28,7 @@ Manual QA the Pathway / PitchGuard boundary cleanup branch.
 
 ## Why this is next
 
-The cleanup changed live navigation, product labels, athlete profile links, PitchGuard athlete selection, and public/workspace roadmap copy. The code has been updated, but the browser flow still needs manual verification before merge.
+The branch now changes live navigation, product labels, athlete profile links, PitchGuard athlete selection, and PitchGuard batch import. The code has been updated, but the browser flow still needs manual verification before merge.
 
 ## QA checklist
 
@@ -43,8 +43,13 @@ The cleanup changed live navigation, product labels, athlete profile links, Pitc
 - [ ] PitchGuard link opens `/pitchguard.html?athlete={athleteId}`.
 - [ ] PitchGuard preselects the correct athlete.
 - [ ] PitchGuard no longer shows its own Add Athlete form.
-- [ ] PitchGuard empty state points to Athlete Profiles when no athletes exist.
-- [ ] Save outing still writes under the selected athlete.
+- [ ] Save single outing still writes under the selected athlete.
+- [ ] Paste comma-delimited import rows and parse.
+- [ ] Paste pipe-delimited import rows and parse.
+- [ ] Confirm exact athlete name matching works.
+- [ ] Confirm unmatched pitcher names require manual athlete selection.
+- [ ] Save matched import rows.
+- [ ] Confirm imported rows appear under matched athletes.
 - [ ] Refresh keeps selected athlete and outing history.
 - [ ] Mobile layout is acceptable.
 
@@ -59,21 +64,20 @@ If QA passes:
 If QA fails:
 
 1. Fix the failing branch behavior.
-2. Update `REQ-0001` QA status.
+2. Update `REQ-0001` or `REQ-0002` QA status.
 3. Update this file again.
 
 ## Current P0 sequence
 
-1. QA Pathway / PitchGuard boundary cleanup branch.
+1. QA Pathway / PitchGuard cleanup and batch import branch.
 2. Verify Firestore security rules.
-3. QA deployed account → athlete → PitchGuard persistence.
-4. Add edit/delete for PitchGuard outings.
-5. Add edit/delete for athlete profiles.
-6. Add age-specific PitchGuard rules.
-7. Add available-on date.
-8. Add safety/disclaimer language.
-9. Add manual QA checklist.
-10. Invite one trusted tester only after P0 is complete.
+3. Add edit/delete for PitchGuard outings.
+4. Add edit/delete for athlete profiles.
+5. Add age-specific PitchGuard rules.
+6. Add available-on date.
+7. Add safety/disclaimer language.
+8. Add manual QA checklist.
+9. Invite one trusted tester only after P0 is complete.
 
 ## Session end requirement
 
