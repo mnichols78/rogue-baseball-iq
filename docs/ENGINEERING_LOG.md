@@ -1,5 +1,22 @@
 # Rogue Baseball IQ — Engineering Log
 
+## 2026-07-14 — Product branch rebuilt and importer corrected
+
+### Completed
+
+- Rebuilt the Pathway/PitchGuard cleanup from current `main` as PR #4.
+- Removed stale/conflicting project-memory copies from the old stacked PR.
+- Preserved the Athlete Profile → PitchGuard workflow and batch import.
+- Fixed import parsing so blank fields do not shift columns.
+- Added quoted CSV support, including commas inside opponent names and notes.
+- Verified JavaScript syntax.
+- Verified parser cases for blank fields, quoted commas, and pipe-delimited rows.
+- Cloudflare generated a successful preview deployment; authenticated Firebase QA remains outstanding.
+
+### Next recommended task
+
+- Run the authenticated QA checklist on the PR #4 branch preview before merge.
+
 This file records meaningful RBI work so the project can resume without depending on a particular chat.
 
 ## 2026-07-14 — Repository state audit and consolidation
