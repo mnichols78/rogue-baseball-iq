@@ -8,9 +8,79 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <style>
-.auth-checking body{visibility:hidden}:root{--midnight:#0B1220;--slate:#1E293B;--teal:#0F766E;--bright:#14B8A6;--cloud:#F8FAFC;--steel:#94A3B8;--muted:#64748B;--gold:#C69214;}
-*{box-sizing:border-box;} body{margin:0;font-family:Arial,sans-serif;background:var(--midnight);color:var(--cloud);line-height:1.6;}.shell{min-height:100vh;display:grid;grid-template-columns:250px 1fr;}.sidebar{border-right:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.92);padding:24px;}.brand{font-size:30px;font-weight:900;margin-bottom:30px;letter-spacing:-1px}.brand span{color:var(--bright);}.side-link{display:block;color:var(--steel);text-decoration:none;padding:12px 14px;border-radius:10px;font-weight:800;margin-bottom:6px;}.side-link.active,.side-link:hover{background:rgba(20,184,166,.16);color:var(--cloud);}.side-note{color:var(--muted);font-size:13px;margin-top:30px;}.account-box{margin-top:24px;padding:12px;border:1px solid rgba(148,163,184,.16);border-radius:12px;background:rgba(11,18,32,.55);color:var(--steel);font-size:13px}.auth-link{color:var(--bright);font-weight:900;text-decoration:none;background:transparent;border:0;cursor:pointer;padding:0}.auth-name{display:block;color:var(--cloud);font-weight:900;margin-bottom:6px}.main{padding:34px;}.eyebrow{color:var(--bright);font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px;}.main h1{font-size:44px;line-height:1.12;margin:0 0 12px;}.intro{color:var(--steel);font-size:18px;max-width:820px;margin:0 0 34px;}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:34px;}.card{background:var(--slate);border:1px solid rgba(148,163,184,.16);border-radius:18px;padding:24px;min-height:190px;}.card h2{margin:0 0 10px;font-size:24px;}.card p{color:var(--steel);margin:0 0 18px;}.badge{display:inline-block;color:var(--gold);font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}.badge.live{color:var(--bright);}.button{display:inline-block;margin-top:8px;padding:12px 18px;background:var(--teal);color:white;text-decoration:none;font-weight:900;border-radius:10px;}.disabled{opacity:.72;}.panel{background:rgba(30,41,59,.72);border:1px solid rgba(148,163,184,.16);border-radius:18px;padding:24px;}.roadmap{display:grid;gap:12px;}.roadmap-item{display:flex;justify-content:space-between;gap:16px;background:rgba(11,18,32,.55);border:1px solid rgba(148,163,184,.12);padding:14px 16px;border-radius:12px;}.roadmap-item span{color:var(--steel);}@media(max-width:900px){.shell{grid-template-columns:1fr;}.main{padding:24px;}.grid{grid-template-columns:1fr;}}
+.auth-checking body{visibility:hidden}:root{--midnight:#0B1220;--slate:#1E293B;--teal:#0F766E;--bright:#14B8A6;--cloud:#F8FAFC;--steel:#94A3B8;--muted:#64748B;--gold:#C69214;}*{box-sizing:border-box;} body{margin:0;font-family:Arial,sans-serif;background:var(--midnight);color:var(--cloud);line-height:1.6;}.shell{min-height:100vh;display:grid;grid-template-columns:250px 1fr;}.sidebar{border-right:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.92);padding:24px;}.brand{font-size:30px;font-weight:900;margin-bottom:30px;letter-spacing:-1px}.brand span{color:var(--bright);}.side-link{display:block;color:var(--steel);text-decoration:none;padding:12px 14px;border-radius:10px;font-weight:800;margin-bottom:6px;}.side-link.active,.side-link:hover{background:rgba(20,184,166,.16);color:var(--cloud);}.side-note{color:var(--muted);font-size:13px;margin-top:30px;}.account-box{margin-top:24px;padding:12px;border:1px solid rgba(148,163,184,.16);border-radius:12px;background:rgba(11,18,32,.55);color:var(--steel);font-size:13px}.auth-link{color:var(--bright);font-weight:900;text-decoration:none;background:transparent;border:0;cursor:pointer;padding:0}.auth-name{display:block;color:var(--cloud);font-weight:900;margin-bottom:6px}.main{padding:34px;}.eyebrow{color:var(--bright);font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px;}.main h1{font-size:44px;line-height:1.12;margin:0 0 12px;}.intro{color:var(--steel);font-size:18px;max-width:820px;margin:0 0 34px;}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:34px;}.card{background:var(--slate);border:1px solid rgba(148,163,184,.16);border-radius:18px;padding:24px;min-height:190px;}.card h2{margin:0 0 10px;font-size:24px;}.card p{color:var(--steel);margin:0 0 18px;}.badge{display:inline-block;color:var(--gold);font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}.badge.live{color:var(--bright);}.button{display:inline-block;margin-top:8px;padding:12px 18px;background:var(--teal);color:white;text-decoration:none;font-weight:900;border-radius:10px;}.disabled{opacity:.72;}.panel{background:rgba(30,41,59,.72);border:1px solid rgba(148,163,184,.16);border-radius:18px;padding:24px;}.roadmap{display:grid;gap:12px;}.roadmap-item{display:flex;justify-content:space-between;gap:16px;background:rgba(11,18,32,.55);border:1px solid rgba(148,163,184,.12);padding:14px 16px;border-radius:12px;}.roadmap-item span{color:var(--steel);}@media(max-width:900px){.shell{grid-template-columns:1fr;}.main{padding:24px;}.grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-<div class="shell"><aside class="sidebar"><div class="brand">RB<span>I</span> Workspace</div><a class="side-link active" href="/dashboard.html">Dashboard</a><a class="side-link" href="/athletes.html">Athletes</a><a class="side-link" href="/pitchguard.html">PitchGuard</a><a class="side-link" href="#pitchlab">PitchLab</a><a class="side-link" href="#swinglab">SwingLab</a><a class="side-link" href="#scouthub">ScoutHub</a><a class="side-link" href="#rbios">RBI OS</a><a class="side-link" href="/">Public Site</a><div class="account-box" data-auth-status><a class="auth-link" href="/account.html">Sign In</a></div><div class="side-note">RBI OS v0.7<br>Product shell preview</div></aside><main class="main"><p class="eyebrow">RBI Workspace</p><h1>Six focused modules. One baseball operating system.</h1><p class="intro">The RBI workspace is the future home for workload protection, athlete profiles, pitching and hitting development, scouting, and team operations.</p><section class="grid"><div id="pitchguard" class="card"><span class="badge live">Live MVP</span><h2>PitchGuard</h2><p>Log outings, manage workload, and support pitcher availability decisions using MLB Pitch Smart-style guidance.</p><a class="button" href="/pitchguard.html">Open PitchGuard</a></div><div id="pathway" class="card"><span class="badge live">Foundation</span><h2>Athletes / Pathway</h2><p>Create persistent athlete profiles that future RBI tools attach to.</p><a class="button" href="/athletes.html">Manage Athletes</a></div><div id="pitchlab" class="card disabled"><span class="badge">Future</span><h2>PitchLab</h2><p>Analyze pitching mechanics and prescribe drills.</p><a class="button">Planned</a></div><div id="swinglab" class="card disabled"><span class="badge">Future</span><h2>SwingLab</h2><p>Analyze hitting mechanics and prescribe drills.</p><a class="button">Planned</a></div><div id="scouthub" class="card disabled"><span class="badge">Future</span><h2>ScoutHub</h2><p>Build scouting reports, matchup notes, and game plans.</p><a class="button">Planned</a></div><div id="rbios" class="card disabled"><span class="badge">System</span><h2>RBI OS</h2><p>Run teams with rosters, lineups, planning, reports, and player profiles.</p><a class="button">Planned</a></div></section><section class="panel"><h2>Build Roadmap</h2><div class="roadmap"><div class="roadmap-item"><strong>Public website</strong><span>Complete</span></div><div class="roadmap-item"><strong>RBI workspace shell</strong><span>Current</span></div><div class="roadmap-item"><strong>Account login + cloud database</strong><span>Live</span></div><div class="roadmap-item"><strong>Athlete profiles</strong><span>Current</span></div><div class="roadmap-item"><strong>PitchGuard cloud sync</strong><span>Next</span></div><div class="roadmap-item"><strong>Pathway MVP</strong><span>Planned</span></div><div class="roadmap-item"><strong>PitchLab / SwingLab / ScoutHub</strong><span>Future</span></div></div></section></main></div><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script><script src="/js/firebase-config.js"></script><script src="/js/rbi-auth.js"></script><script>RBIAuth.requireAuth();</script></body></html>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">RB<span>I</span> Workspace</div>
+    <a class="side-link active" href="/dashboard.html">Dashboard</a>
+    <a class="side-link" href="/athletes.html">Athlete Profiles</a>
+    <a class="side-link" href="/pitchguard.html">PitchGuard</a>
+    <a class="side-link" href="#pathway">Pathway</a>
+    <a class="side-link" href="#pitchlab">PitchLab</a>
+    <a class="side-link" href="#swinglab">SwingLab</a>
+    <a class="side-link" href="#scouthub">ScoutHub</a>
+    <a class="side-link" href="#rbios">RBI OS</a>
+    <a class="side-link" href="/">Public Site</a>
+    <div class="account-box" data-auth-status><a class="auth-link" href="/account.html">Sign In</a></div>
+    <div class="side-note">RBI OS v0.8<br>Product shell preview</div>
+  </aside>
+
+  <main class="main">
+    <p class="eyebrow">RBI Workspace</p>
+    <h1>One athlete profile. Connected baseball tools.</h1>
+    <p class="intro">RBI starts with persistent athlete profiles. PitchGuard is the first live product module attached to those profiles. Pathway, PitchLab, SwingLab, ScoutHub, and RBI OS remain planned modules until their workflows are built.</p>
+
+    <section class="grid">
+      <div id="profiles" class="card">
+        <span class="badge live">Foundation</span>
+        <h2>Athlete Profiles</h2>
+        <p>Create the permanent athlete record that RBI tools attach to across seasons, teams, and development stages.</p>
+        <a class="button" href="/athletes.html">Manage Athletes</a>
+      </div>
+
+      <div id="pitchguard" class="card">
+        <span class="badge live">Live MVP</span>
+        <h2>PitchGuard</h2>
+        <p>Select an existing athlete profile, log outings, and support pitcher availability decisions from the saved workload history.</p>
+        <a class="button" href="/pitchguard.html">Open PitchGuard</a>
+      </div>
+
+      <div id="pathway" class="card disabled">
+        <span class="badge">Planned</span>
+        <h2>Pathway</h2>
+        <p>Future athlete development timeline for goals, milestones, measurements, and long-term priorities.</p>
+        <a class="button" href="/athletes.html">Profiles First</a>
+      </div>
+
+      <div id="pitchlab" class="card disabled"><span class="badge">Future</span><h2>PitchLab</h2><p>Analyze pitching mechanics and prescribe drills.</p><a class="button">Planned</a></div>
+      <div id="swinglab" class="card disabled"><span class="badge">Future</span><h2>SwingLab</h2><p>Analyze hitting mechanics and prescribe drills.</p><a class="button">Planned</a></div>
+      <div id="scouthub" class="card disabled"><span class="badge">Future</span><h2>ScoutHub</h2><p>Build scouting reports, matchup notes, and game plans.</p><a class="button">Planned</a></div>
+      <div id="rbios" class="card disabled"><span class="badge">System</span><h2>RBI OS</h2><p>Run teams with rosters, lineups, planning, reports, and player profiles.</p><a class="button">Planned</a></div>
+    </section>
+
+    <section class="panel">
+      <h2>Build Roadmap</h2>
+      <div class="roadmap">
+        <div class="roadmap-item"><strong>Public website</strong><span>Complete</span></div>
+        <div class="roadmap-item"><strong>RBI workspace shell</strong><span>Live</span></div>
+        <div class="roadmap-item"><strong>Account login + cloud database</strong><span>Live</span></div>
+        <div class="roadmap-item"><strong>Athlete profiles</strong><span>Live MVP</span></div>
+        <div class="roadmap-item"><strong>PitchGuard cloud log</strong><span>Live MVP</span></div>
+        <div class="roadmap-item"><strong>PitchGuard edit/delete + age rules</strong><span>Next</span></div>
+        <div class="roadmap-item"><strong>Pathway MVP</strong><span>Planned</span></div>
+        <div class="roadmap-item"><strong>PitchLab / SwingLab / ScoutHub</strong><span>Future</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="/js/firebase-config.js"></script>
+<script src="/js/rbi-auth.js"></script>
+<script>RBIAuth.requireAuth();</script>
+</body>
+</html>
