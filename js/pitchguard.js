@@ -71,7 +71,29 @@ function findAthleteByName(name) {
 
 function splitImportLine(line) {
   const delimiter = line.includes('\t') ? '\t' : line.includes('|') ? '|' : ',';
-  return line.split(delimiter).map((x) => x.trim()).filter((x) => x !== '');
+  if (delimiter !== ',') return line.split(delimiter).map((x) => x.trim());
+
+  const fields = [];
+  let field = '';
+  let quoted = false;
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    if (char === '"') {
+      if (quoted && line[i + 1] === '"') {
+        field += '"';
+        i++;
+      } else {
+        quoted = !quoted;
+      }
+    } else if (char === ',' && !quoted) {
+      fields.push(field.trim());
+      field = '';
+    } else {
+      field += char;
+    }
+  }
+  fields.push(field.trim());
+  return fields;
 }
 
 function looksLikeHeader(line) {
