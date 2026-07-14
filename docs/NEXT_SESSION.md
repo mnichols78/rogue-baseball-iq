@@ -23,6 +23,8 @@ Run authenticated manual QA on the PR #4 preview.
 - [ ] Public homepage loads and distinguishes live versus planned modules.
 - [ ] Signed-out users are redirected from protected pages.
 - [ ] Account sign-in works.
+- [ ] Forgot password sends a Firebase reset email.
+- [ ] Reset link allows a new password and the new password signs in.
 - [ ] Athlete Profiles loads.
 - [ ] An athlete can be created and selected.
 - [ ] The selected athlete links to `/pitchguard.html?athlete={athleteId}`.
