@@ -13,6 +13,12 @@
 - Verified parser cases for blank fields, quoted commas, and pipe-delimited rows.
 - Cloudflare generated a successful preview deployment; authenticated Firebase QA remains outstanding.
 
+### Additional P0 fix
+
+- Added Firebase password reset to the account page.
+- Reset requires an entered email address, reports success, handles common failures, and prevents repeated submission while sending.
+- JavaScript syntax was verified; delivery of the Firebase reset email still requires preview QA.
+
 ### Next recommended task
 
 - Run the authenticated QA checklist on the PR #4 branch preview before merge.
